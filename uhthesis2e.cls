@@ -13,8 +13,8 @@
 %%%                        1680 East-West Road
 %%%                        Honolulu, HI 96822
 %%%                        USA",
-%%%     telephone       = "(808) 956-6920",
-%%%     email           = "cmoore@hawaii.edu, rbrewer@hawaii.edu",
+%%%     telephone       = "",
+%%%     email           = "latex-uhm-thesis-discuss@googlegroups.com",
 %%%     codetable       = "ISO/ASCII",
 %%%     keywords        = "LaTeX, uhthesis2e",
 %%%     supported       = "not supported",
@@ -41,7 +41,7 @@
 %%%
 %%%                        The recommended way to start using this document
 %%%                        class is to read the uhtest.tex demo file and use it 
-%%%                        as a template for your thesis file.
+%%%                        as a template for your thesis file."
 %%%  }
 %%% ====================================================================
 
