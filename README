@@ -1,0 +1,43 @@
+This archive contains everything necessary to prepare a University of Hawaii
+thesis or dissertation with a recent LaTeX2e environment like TeX Live. For
+information on how do download LaTeX distributions, go to <http://www.tug.org/>
+
+This class is hosted at Google Code:
+
+<http://code.google.com/p/latex-uhm-thesis/>
+
+For assistance with this package, please visit the associated Google Group:
+
+<http://groups.google.com/group/latex-uhm-thesis-discuss>
+
+The following files should be placed in your personal or departmental LaTeX
+style directory:
+
+uht10.clo	Option file for 10 point text
+uht11.clo	Option file for 11 point text
+uht12.clo	Option file for 12 point text
+uhthesis2e.cls	Document class file
+
+For example, on MacTeX 2008 you could create the directory
+/usr/local/texlive/texmf-local/tex/latex/uhthesis and copy all four files
+above into that directory to allow all users on the computer access to the
+class. If you only need the class file to be accessible by yourself, you
+could create ~/Library/texmf/tex/latex/uhthesis (all the directories after
+Library will have to be created) and then copy the four files in. A similar
+procedure should work for other TeX Live 2008 distributions.
+
+An example of how to use the style with extensive comments is provided. The
+following files make up this style. Start with "uhtest.tex".
+
+uhtest.tex
+uhtest-abstract.tex
+uhtest-acknowledgements.tex
+uhtest-appendix.tex
+uhtest-body.tex
+uhtest-dedication.tex
+uhtest-figure.eps
+uhtest.bib
+uhtest.dvi
+
+Good luck! You can report bugs or wonderful new features you have implemented
+to the Google Group discussed above.
