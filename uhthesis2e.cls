@@ -6,7 +6,7 @@
 %%%  @LaTeX-class-file{
 %%%     filename        = "uhthesis2e.cls",
 %%%     version         = "1.1.0",
-%%%     date            = "29 September 2008",
+%%%     date            = "6 October 2008",
 %%%     portedby        = "Carleton A. Moore, Robert S. Brewer",
 %%%     address         = "Collaborative Software Development Lab
 %%%                        POST Building 307B
