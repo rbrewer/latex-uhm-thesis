@@ -5,9 +5,9 @@
 %%% ====================================================================
 %%%  @LaTeX-class-file{
 %%%     filename        = "uhthesis2e.cls",
-%%%     version         = "1.0.0",
+%%%     version         = "1.1.0",
 %%%     date            = "29 September 2008",
-%%%     portedby        = "Robert S. Brewer, Carleton A. Moore",
+%%%     portedby        = "Carleton A. Moore, Robert S. Brewer",
 %%%     address         = "Collaborative Software Development Lab
 %%%                        POST Building 307B
 %%%                        1680 East-West Road
@@ -172,8 +172,8 @@ Class (a modification of University of California Thesis Class)]
 % supporting the title and signature pages.
 %
 % \tableofcontents:
-\def\contentsname{Contents}
-%                 ~~~~~~~~
+\def\contentsname{Table of Contents}
+%                 ~~~~~~~~~~~~~~~~~
 %
 % \listoffigures:
 \def\listfigurename{List of Figures}
@@ -213,8 +213,8 @@ Class (a modification of University of California Thesis Class)]
 %                 ~~~~~~~~
 %
 % acknowledge environment:
-\def\acknowledgename{Acknowledgements}
-%                    ~~~~~~~~~~~~~~~~
+\def\acknowledgname{Acknowledgments}
+%                   ~~~~~~~~~~~~~~~
 
 %    ****************************************
 %    *             FRONT MATTER             *
@@ -242,7 +242,7 @@ Class (a modification of University of California Thesis Class)]
 % The name of your committee's chair
 \def\chair#1{\gdef\@chair{#1}}
 
-% The names of your other committe members, one per line
+% The names of your other committee members, one per line
 \def\othermembers#1{\gdef\@othermembers{#1}}
 
 % The number of committee members, which affects the number of lines
@@ -264,9 +264,9 @@ Class (a modification of University of California Thesis Class)]
 
 \def\endalwayssingle{\if@restonecol\twocolumn \else \newpage \fi}
 
-% \maketitle outputs the complete titlepage. It requires all the
+% \maketitle outputs the complete title page. It requires all the
 % above macros. Based on the options provided, it will customize the
-% titlepage: thesis vs. dissertation, proposal vs. actual
+% title page: thesis vs. dissertation, proposal vs. actual
 
 % Set the font that will be used in the front matter headings
 \def\fmfont{\fontsize\@xiipt{14.5}\selectfont}
@@ -289,11 +289,16 @@ Class (a modification of University of California Thesis Class)]
     \ifthenelse{\boolean{\@proposal}}{
       \ifthenelse{\boolean{\@thesisp}}{
         A THESIS PROPOSAL SUBMITTED TO MY THESIS COMMITTEE \par}{
-        A DISSERTATION PROPOSAL SUBMITTED TO MY DISSERTATION COMMITTEE \par}
+        A DISSERTATION PROPOSAL SUBMITTED TO THE GRADUATE DIVISION \par
+        OF THE UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT \par
+        OF THE REQUIREMENTS FOR THE DEGREE OF \par}
         \bigskip
+      \bigskip
+      \uppercase\expandafter{\@degree} \par
       \bigskip \medskip
+      IN \par
       \bigskip \medskip
-      \bigskip \medskip}{
+      \uppercase\expandafter{\@field} \par}{
       \ifthenelse{\boolean{\@thesisp}}{
         A THESIS SUBMITTED TO THE GRADUATE DIVISION OF THE \par
         UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT \par
@@ -313,13 +318,14 @@ Class (a modification of University of California Thesis Class)]
     By \par
     {\@author} \par
     \bigskip \bigskip
-    \ifthenelse{\boolean{\@proposal}}{}{
+%    \ifthenelse{\boolean{\@proposal}}{}{
       \ifthenelse{\boolean{\@thesisp}}{
         Thesis Committee: \par}{
         Dissertation Committee: \par}
       \bigskip \medskip
       {\@chair}, Chairperson \par
-      {\@othermembers} \par}
+      {\@othermembers} \par
+%}
     \ifthenelse{\boolean{\@proposal}}{
       \bigskip
       \bigskip
@@ -418,7 +424,7 @@ Class (a modification of University of California Thesis Class)]
 \begin{center}
 {\fmfont
 \vspace*{7in}
-Copyright \@degreeyear\par
+\copyright Copyright \@degreeyear\par
 \vspace{.1in}
 by\par
 \vspace{.1in}
@@ -432,11 +438,12 @@ by\par
 
 \def\abstract{
 \begin{alwayssingle}
-\begin{center}
-{\fmfont
-{\bfseries \uppercase\expandafter{\abstractname}}\par
-}\vspace{.1in}
-\end{center}
+\chapter*{\abstractname}
+%\begin{center}
+%{\fmfont
+%{\bfseries \uppercase\expandafter{\abstractname}}\par
+%}\vspace{.1in}
+%\end{center}
 \addcontentsline{toc}{chapter}{\abstractname}
 }
 
@@ -450,16 +457,17 @@ by\par
 
 \newenvironment{dedication}{\begin{alwayssingle}}{\end{alwayssingle}}
 
-% ACKNOWLEDGEMENTS
+% ACKNOWLEDGMENTS
 %
-% The acknowledgements environment puts a large, bold, centered 
-% "Acknowledgements" label at the top of the page.
+% The acknowledgments environment puts a large, bold, centered 
+% "Acknowledgments" label at the top of the page.
 
-\newenvironment{acknowledgements}{\begin{alwayssingle}
-\begin{center}
-{\large \bfseries \acknowledgename}
-\end{center}
-\addcontentsline{toc}{chapter}{\acknowledgename}
+\newenvironment{acknowledgments}{\begin{alwayssingle}
+\chapter*{\acknowledgname}
+%\begin{center}
+%{\large \bfseries \uppercase\expandafter{\acknowledgname}}
+%\end{center}
+\addcontentsline{toc}{chapter}{\acknowledgname}
 }{\end{alwayssingle}}
 
 % FRONTMATTER environment
@@ -673,7 +681,7 @@ by\par
 
 %% Redefine @sect so that the abbreviated name is used only for %%
 %% the page heading, and the full name goes into the table of   %%
-%% uhthesis.cls -- JTW                                        %%
+%% uhthesis2e.cls -- JTW                                        %%
 
 \def\@sect#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth
      \let\@svsec\@empty\else
@@ -879,20 +887,20 @@ by\par
 %% First line of l@chapter changed 24 May 89, as suggested
 %% by Jerry Leichter.
 %%
-\def\l@chapter#1#2{\addpenalty{-\@highpenalty}%
-   \vskip 1.0em plus\p@   % space above chapter line
-   \@tempdima 1.5em       % width of box holding chapter number
-   \begingroup
-     \parindent \z@ \rightskip \@pnumwidth
-     \parfillskip -\@pnumwidth
-     \bfseries                  % Boldface.
-     \leavevmode          % TeX command to enter horizontal mode.
-      \advance\leftskip\@tempdima  %% added 5 Feb 88 to conform to
-      \hskip -\leftskip            %% 25 Jan 88 change to \numberline
-     #1\nobreak\hfil \nobreak\hbox to\@pnumwidth{\hss #2}\par
-     \penalty\@highpenalty %% added 24 May 89, suggested by J. Leichter
-   \endgroup}
-
+%\def\l@chapter#1#2{\addpenalty{-\@highpenalty}%
+%   \vskip 1.0em plus\p@   % space above chapter line
+%   \@tempdima 1.5em       % width of box holding chapter number
+%   \begingroup
+%     \parindent \z@ \rightskip \@pnumwidth
+%     \parfillskip -\@pnumwidth
+%     \bfseries                  % Boldface.
+%     \leavevmode          % TeX command to enter horizontal mode.
+%      \advance\leftskip\@tempdima  %% added 5 Feb 88 to conform to
+%      \hskip -\leftskip            %% 25 Jan 88 change to \numberline
+%     #1\nobreak\hfil \nobreak\hbox to\@pnumwidth{\hss #2}\par
+%     \penalty\@highpenalty %% added 24 May 89, suggested by J. Leichter
+%   \endgroup}
+\def\l@chapter{\@dottedtocline{0}{0.1em}{1.4em}}
 \def\l@section{\@dottedtocline{1}{1.5em}{2.3em}}
 \def\l@subsection{\@dottedtocline{2}{3.8em}{3.2em}}
 \def\l@subsubsection{\@dottedtocline{3}{7.0em}{4.1em}}
@@ -906,7 +914,12 @@ by\par
   \if@twocolumn\@restonecoltrue\onecolumn\fi
   \chapter*{\listfigurename\@mkboth{\uppercase{\listfigurename}}%
 {\uppercase{\listfigurename}}}
-   \addcontentsline{toc}{chapter}{\listfigurename}
+\addcontentsline{toc}{chapter}{\listfigurename}
+
+% ACK! This is a hyper-bletcherous hack to get the headings in the right
+% place. Presumably a TeXpert would have an elegant way to do this. RSB 3/14/00
+\hspace{-0.515in} \underline{\figurename} \hspace{5.2in} \underline{Page}
+
    {\ssp\@starttoc{lof}}\if@restonecol
     \twocolumn\fi}
 
@@ -924,9 +937,13 @@ by\par
   \chapter*{\listtablename\@mkboth{\uppercase{\listtablename}}%
 {\uppercase{\listtablename}}}
    \addcontentsline{toc}{chapter}{\listtablename}
+
+% ACK! This is a hyper-bletcherous hack to get the headings in the right
+% place. Presumably a TeXpert would have an elegant way to do this. RSB 3/14/00
+\hspace{-0.48in} \underline{\tablename} \hspace{5.21in} \underline{Page}
+
    {\ssp\@starttoc{lot}}\if@restonecol
   \twocolumn\fi}
-
 
 \let\l@table\l@figure
 
@@ -1104,9 +1121,9 @@ by\par
 
 \long\def\@makecaption#1#2{% Add space only if something is ...
    \par\ifdim\prevdepth>-\p@ \vskip 10\p@\relax \fi % above the caption
-   \setbox\@tempboxa\hbox{\vbox to\topskip{}#1: #2\unskip\strut}% 
+   \setbox\@tempboxa\hbox{\vbox to\topskip{}#1. #2\unskip\strut}% 
    \ifdim \wd\@tempboxa >\hsize      % IF longer than one line:
-       {\ssp#1: #2\unskip\strut\par} %   THEN set as ordinary paragraph.
+       {\ssp#1. #2\unskip\strut\par} %   THEN set as ordinary paragraph.
      \else                           %   ELSE  center.
        \hbox to\hsize{\hfil\unhbox\@tempboxa\hfil}%
    \fi}
