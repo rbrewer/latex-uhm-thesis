@@ -18,7 +18,6 @@
 %
 % and version 1.2 or later is part of all distributions of LaTeX
 % version 1999/12/01 or later.
-
 %
 % \fi
 %
@@ -80,7 +79,7 @@
 % the requirements for University of Hawai`i Masters theses and Ph.D.
 % dissertations.
 %                        
-% This document class was based on the ``Style & Policy Manual For Theses and
+% This document class was based on the ``Style and Policy Manual For Theses and
 % Dissertations'' provided by the University of Hawai`i Graduate Division. The
 % version used says ``Revised April 2002'' inside the title page. It is your
 % responsibility to determine whether this style meets your needs.
@@ -105,18 +104,19 @@
 %
 % \section{Implementation}
 %
-% This class is derived from the standard |report| class. Two-column thesis and
+% This class is derived from the standard |report| class. Two-column theses and
 % dissertations are not allowed at all, while twoside and paper formats other
 % than letter are only allowed in draft mode. The class also takes options for
 % single or double spacing, though again single spacing is only allowed in draft
 % mode.
 % \begin{macrocode}
+\newcommand\@doublespacep{}
+\newcommand\@draftp{}
+\newcommand\@englishp{}
+\newcommand\@letterpaperp{}
 \newcommand\@proposalp{}
 \newcommand\@thesisp{}
-\newcommand\@draftp{}
-\newcommand\@doublespacep{}
 \newcommand\@twosidep{}
-\newcommand\@letterpaperp{}
 \DeclareOption{a4paper}{\renewcommand\@letterpaperp{false}
     \PassOptionsToClass{\CurrentOption}{report}}
 \DeclareOption{a5paper}{\renewcommand\@letterpaperp{false}
@@ -127,8 +127,16 @@
 \DeclareOption{dissertation}{\renewcommand\@thesisp{false}}
 \DeclareOption{doublespacing}{\renewcommand\@doublespacep{true}
     \PassOptionsToPackage{\CurrentOption}{setspace}}
+\DeclareOption{draft}{\renewcommand\@draftp{true}
+    \PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{english}{\renewcommand\@englishp{true}}
 \DeclareOption{executivepaper}{\renewcommand\@letterpaperp{false}
     \PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{final}{\renewcommand\@draftp{false}
+    \PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{hawaiian}{\renewcommand\@englishp{false}
+    \ClassWarningNoLine{uhthesis}{The ``hawaiian'' option is not supported at
+        this time}}
 \DeclareOption{letterpaper}{\renewcommand\@letterpaperp{true}
     \PassOptionsToClass{\CurrentOption}{report}}
 \DeclareOption{legalpaper}{\renewcommand\@letterpaperp{false}
@@ -140,7 +148,7 @@
     \PassOptionsToPackage{singlespacing}{setspace}}
 \DeclareOption{thesis}{\renewcommand\@thesisp{true}}
 \DeclareOption{twocolumn}{\OptionNotUsed
-    \ClassWarning{uhthesis}{This class does not support the two column format}}
+    \ClassWarningNoLine{uhthesis}{This class does not support the two column format}}
 \DeclareOption{twoside}{\renewcommand\@twosidep{true}
     \PassOptionsToClass{\CurrentOption}{report}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
@@ -159,5 +167,20 @@
 \RequirePackage[left=1.5in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
 % \end{macrocode}
 %
+% \begin{macrocode}
+\ifthenelse{\boolean{\@draftp}}{}{
+    \ifthenelse{\boolean{\@doublespacep}}{}{
+        \ClassWarningNoLine{uhthesis}{final drafts should be double spaced}
+    }
+    \ifthenelse{\boolean{\@letterpaperp}}{}{
+        \ClassWarningNoLine{uhthesis}{final drafts should be printed on letter
+            paper}
+    }
+    \ifthenelse{\boolean{\@twosidep}}{
+        \ClassWarningNoLine{uhthesis}{final drafts should be printed on only
+            one side}
+    }{}
+}
+% \end{macrocode}
 % \Finale
 \endinput
