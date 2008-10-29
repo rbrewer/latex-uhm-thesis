@@ -66,7 +66,6 @@
 %
 % \DoNotIndex{\newcommand,\newenvironment}
 % 
-%
 % \title{The \textsf{uhthesis} class\thanks{This document corresponds to
 %   \textsf{uhthesis}~\fileversion, dated \filedate.}}
 % \author{Mark Stillwell \\ \texttt{markls@hawaii.edu}}
@@ -111,52 +110,77 @@
 % mode.
 % 
 %    \begin{macrocode}
-\newcommand{\doublespacep}{}
+\newcommand{\@doublespacep}{}
 \newcommand{\@draftp}{}
-\newcommand\@englishp{}
-\newcommand\@letterpaperp{}
-\newcommand\@proposalp{}
-\newcommand\@thesisp{}
-\newcommand\@twosidep{}
-\DeclareOption{a4paper}{\renewcommand\@letterpaperp{false}
-    \PassOptionsToClass{\CurrentOption}{report}}
-\DeclareOption{a5paper}{\renewcommand\@letterpaperp{false}
-    \PassOptionsToClass{\CurrentOption}{report}}
-\DeclareOption{b5paper}{\renewcommand\@letterpaperp{false}
-    \PassOptionsToClass{\CurrentOption}{report}}
-\DeclareOption{actual}{\renewcommand\@proposalp{false}}
-\DeclareOption{dissertation}{\renewcommand\@thesisp{false}}
+\newcommand{\@englishp}{}
+\newcommand{\@letterpaperp}{}
+\newcommand{\@proposalp}{}
+\newcommand{\@thesisp}{}
+\newcommand{\@twosidep}{}
+\DeclareOption{a4paper}{
+    \renewcommand{\@letterpaperp}{false}
+    \PassOptionsToClass{\CurrentOption}{report}
+}
+\DeclareOption{a5paper}{
+    \renewcommand{\@letterpaperp}{false}
+    \PassOptionsToClass{\CurrentOption}{report}
+}
+\DeclareOption{b5paper}{
+    \renewcommand{\@letterpaperp}{false}
+    \PassOptionsToClass{\CurrentOption}{report}
+}
+\DeclareOption{actual}{\renewcommand{\@proposalp}{false}}
+\DeclareOption{dissertation}{\renewcommand{\@thesisp}{false}}
 \DeclareOption{doublespacing}{
     \renewcommand{\@doublespacep}{true}
     \PassOptionsToPackage{\CurrentOption}{setspace}
 }
-\DeclareOption{draft}{\renewcommand\@draftp{true}
-    \PassOptionsToClass{\CurrentOption}{report}}
-\DeclareOption{english}{\renewcommand\@englishp{true}}
-\DeclareOption{executivepaper}{\renewcommand\@letterpaperp{false}
-    \PassOptionsToClass{\CurrentOption}{report}}
-\DeclareOption{final}{\renewcommand\@draftp{false}
-    \PassOptionsToClass{\CurrentOption}{report}}
-\DeclareOption{hawaiian}{\renewcommand\@englishp{false}
-    \ClassWarningNoLine{uhthesis}{The ``hawaiian'' option is not supported at
-        this time}}
-\DeclareOption{letterpaper}{\renewcommand\@letterpaperp{true}
-    \PassOptionsToClass{\CurrentOption}{report}}
-\DeclareOption{legalpaper}{\renewcommand\@letterpaperp{false}
-    \PassOptionsToClass{\CurrentOption}{report}}
-\DeclareOption{oneside}{\renewcommand\@twosidep{false}
-    \PassOptionsToClass{\CurrentOption}{report}}
-\DeclareOption{proposal}{\renewcommand\@proposalp{true}}
-\DeclareOption{singlespacing}{\renewcommand\@doublespacep{false}
-    \PassOptionsToPackage{singlespacing}{setspace}}
-\DeclareOption{thesis}{\renewcommand\@thesisp{true}}
-\DeclareOption{twocolumn}{\OptionNotUsed
-    \ClassWarningNoLine{uhthesis}{This class does not support the two column format}}
-\DeclareOption{twoside}{\renewcommand\@twosidep{true}
-    \PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{draft}{
+    \renewcommand{\@draftp}{true}
+    \PassOptionsToClass{\CurrentOption}{report}
+}
+\DeclareOption{english}{\renewcommand{\@englishp}{true}}
+\DeclareOption{executivepaper}{
+    \renewcommand{\@letterpaperp}{false}
+    \PassOptionsToClass{\CurrentOption}{report}
+}
+\DeclareOption{final}{
+    \renewcommand{\@draftp}{false}
+    \PassOptionsToClass{\CurrentOption}{report}
+}
+\DeclareOption{hawaiian}{
+    \renewcommand{\@englishp}{false}
+    \ClassWarningNoLine{uhthesis}
+        {The ``hawaiian'' option is not supported at this time}}
+\DeclareOption{letterpaper}{
+    \renewcommand{\@letterpaperp}{true}
+    \PassOptionsToClass{\CurrentOption}{report}
+}
+\DeclareOption{legalpaper}{
+    \renewcommand{\@letterpaperp}{false}
+    \PassOptionsToClass{\CurrentOption}{report}
+}
+\DeclareOption{oneside}{
+    \renewcommand{\@twosidep}{false}
+    \PassOptionsToClass{\CurrentOption}{report}
+}
+\DeclareOption{proposal}{\renewcommand{\@proposalp}{true}}
+\DeclareOption{singlespacing}{
+    \renewcommand{\@doublespacep}{false}
+    \PassOptionsToPackage{singlespacing}{setspace}
+}
+\DeclareOption{thesis}{\renewcommand{\@thesisp}{true}}
+\DeclareOption{twocolumn}{
+    \OptionNotUsed
+    \ClassWarningNoLine{uhthesis}{This class does not support the two column format}
+}
+\DeclareOption{twoside}{
+    \renewcommand{\@twosidep}{true}
+    \PassOptionsToClass{\CurrentOption}{report}
+}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
-\ExecuteOptions{11pt,actual,doublespacing,letterpaper,onecolumn,oneside,final,
-    thesis}
+\ExecuteOptions
+    {11pt,actual,doublespacing,letterpaper,onecolumn,oneside,final,thesis}
 \ProcessOptions\relax
 \LoadClass[onecolumn]{report}
 %    \end{macrocode}
@@ -281,16 +305,6 @@
 % capitalized normally.
 \def\field#1{\gdef\@field{#1}}
 
-% \alwayssingle and \endalwayssingle
-%
-% These macros define an environment for front matter that is always 
-% single column even in a double-column document.
-
-\def\alwayssingle{\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
-     \else \newpage \fi}
-
-\def\endalwayssingle{\if@restonecol\twocolumn \else \newpage \fi}
-
 % \maketitle outputs the complete title page. It requires all the
 % above macros. Based on the options provided, it will customize the
 % title page: thesis vs. dissertation, proposal vs. actual
@@ -300,8 +314,7 @@
 \def\fmsmallfont{\fontsize\@xiipt{14pt}\selectfont}
 
 \def\maketitle{
-{\ssp
-\begin{alwayssingle}
+{
     \let\footnotesize\small
     \let\footnoterule\relax
     \thispagestyle{empty}
@@ -313,7 +326,7 @@
     \uppercase\expandafter{\@title} \par
     \bigskip \medskip
     \vspace{6ex}%
-    \ifthenelse{\boolean{\@proposal}}{
+    \ifthenelse{\boolean{\@proposalp}}{
       \ifthenelse{\boolean{\@thesisp}}{
         A THESIS PROPOSAL SUBMITTED TO MY THESIS COMMITTEE \par}{
         A DISSERTATION PROPOSAL SUBMITTED TO THE GRADUATE DIVISION \par
@@ -345,7 +358,7 @@
     By \par
     {\@author} \par
     \bigskip \bigskip
-%    \ifthenelse{\boolean{\@proposal}}{}{
+%    \ifthenelse{\boolean{\@proposalp}}{}{
       \ifthenelse{\boolean{\@thesisp}}{
         Thesis Committee: \par}{
         Dissertation Committee: \par}
@@ -353,21 +366,19 @@
       {\@chair}, Chairperson \par
       {\@othermembers} \par
 %}
-    \ifthenelse{\boolean{\@proposal}}{
+    \ifthenelse{\boolean{\@proposalp}}{
       \bigskip
       \bigskip
       \today \par
       Version \@versionnum}{
-      \ifnum \@draftmark = 1
+      \ifthenelse{\boolean{\@draftp}}{
       \bigskip
       \bigskip
       \today \par
       Version \@versionnum 
-      \fi}
+      }}
 \end{center}
     \vfil\null
-\end{alwayssingle}
-
 \setcounter{footnote}{0}
 }}
 
@@ -382,9 +393,8 @@
 % defined.
 
 \def\signaturepage{
-\ifthenelse{\boolean{\@proposal}}{}{
-    \ifnum \@draftmark = 0
-    \begin{alwayssingle}
+\ifthenelse{\boolean{\@proposalp}}{}{
+    \ifthenelse{\boolean{\@draftp}}{}{
       \setlength{\rightskip}{1in}
       \setcounter{page}{2}
       \null\vfill
@@ -435,8 +445,7 @@
         \end{minipage}
       \end{flushright}
       \vfill\null
-    \end{alwayssingle}
-    \fi
+    }
     }
   }
 
@@ -447,7 +456,6 @@
 % from the \degreeyear macro.
 
 \def\copyrightpage{
-\begin{alwayssingle}
 \begin{center}
 {\fmfont
 \vspace*{7in}
@@ -457,14 +465,13 @@ by\par
 \vspace{.1in}
 \@author}
 \end{center}
-\end{alwayssingle}}
+}
 
 % ABSTRACT
 %
 % The ABSTRACT environment allows for multi-page abstracts.
 
 \def\abstract{
-\begin{alwayssingle}
 \chapter*{\abstractname}
 %\begin{center}
 %{\fmfont
@@ -474,7 +481,7 @@ by\par
 \addcontentsline{toc}{chapter}{\abstractname}
 }
 
-\def\endabstract{\par\vfil\null\end{alwayssingle}
+\def\endabstract{\par\vfil\null
 }
 
 % DEDICATION
@@ -482,20 +489,20 @@ by\par
 % The dedication environment just makes sure the dedication gets its
 % own page.
 
-\newenvironment{dedication}{\begin{alwayssingle}}{\end{alwayssingle}}
+\newenvironment{dedication}{}{}
 
 % ACKNOWLEDGMENTS
 %
 % The acknowledgments environment puts a large, bold, centered 
 % "Acknowledgments" label at the top of the page.
 
-\newenvironment{acknowledgments}{\begin{alwayssingle}
+\newenvironment{acknowledgments}{
 \chapter*{\acknowledgname}
 %\begin{center}
 %{\large \bfseries \uppercase\expandafter{\acknowledgname}}
 %\end{center}
 \addcontentsline{toc}{chapter}{\acknowledgname}
-}{\end{alwayssingle}}
+}{}
 
 % FRONTMATTER environment
 %
@@ -568,7 +575,7 @@ by\par
 %   This is implemented by \let'in \\ equal \@centercr.
 %
 \def\verse{\par\let\\=\@centercr
-  \list{}{\ssp\itemsep\z@ \itemindent -1.5em\listparindent \itemindent
+  \list{}{\singlespacing\itemsep\z@ \itemindent -1.5em\listparindent \itemindent
           \rightmargin\leftmargin\advance\leftmargin 1.5em}\item[]}
 \let\endverse\endlist
 
@@ -576,14 +583,14 @@ by\par
 %   Fills lines
 %   Indents paragraph
 %
-\def\quotation{\par\list{}{\ssp\listparindent 1.5em
+\def\quotation{\par\list{}{\singlespacing\listparindent 1.5em
     \itemindent\listparindent
     \rightmargin\leftmargin\parsep \z@ plus\p@}\item[]}
 \let\endquotation=\endlist
 
 % QUOTE -- same as quotation except no paragraph indentation,
 %
-\def\quote{\par\list{}{\ssp\rightmargin\leftmargin}\item[]}
+\def\quote{\par\list{}{\singlespacing\rightmargin\leftmargin}\item[]}
 \let\endquote=\endlist
 
 % DESCRIPTION
@@ -616,7 +623,7 @@ by\par
 % the source of the problem. (EVM, 9/25/94)
 % 94/11/03 BBF converted \tt to \ttfamily
 
-\def\@verbatim{\trivlist\ssp \item[]\if@minipage\else\vskip\parskip\fi
+\def\@verbatim{\trivlist\singlespacing \item[]\if@minipage\else\vskip\parskip\fi
 \leftskip\@totalleftmargin\rightskip\z@
 \parindent\z@\parfillskip\@flushglue\parskip\z@
 %%RmS 91/08/26 Added \@@par to clear possible \parshape definition
@@ -648,9 +655,9 @@ by\par
                         %  (See LaTeX manual.)
 
 % We have to redefine tabular here in order to make it single-spaced.
-\def\tabular{\par\ssp\let\@halignto\@empty\@tabular}
+\def\tabular{\par\singlespacing\let\@halignto\@empty\@tabular}
 \expandafter \def\csname tabular*\endcsname #1%
-{\par\ssp\def\@halignto{to#1}\@tabular}
+{\par\singlespacing\def\@halignto{to#1}\@tabular}
 
 % \smalltabular and \smalltabular* are alternative tabular styles
 % in the \small font.  They are required because single-spacing implies a 
@@ -663,11 +670,11 @@ by\par
 \expandafter \let \csname endsmalltabular*\endcsname = \endtabular
 
 % \scriptsizetabular and \scriptsizetabular* are analogs of \smalltabular
-\def\scriptsizetabular{\par\scriptsizessp\let\@halignto\@empty\@tabular}
-\def\endscriptsizetabular{\endtabular}
-\expandafter \def\csname scriptsizetabular*\endcsname #1%
-{\par\scriptsizessp\def\@halignto{to#1}\@tabular}
-\expandafter \let \csname endscriptsizetabular*\endcsname = \endtabular
+%\def\scriptsizetabular{\par\scriptsizessp\let\@halignto\@empty\@tabular}
+%\def\endscriptsizetabular{\endtabular}
+%\expandafter \def\csname scriptsizetabular*\endcsname #1%
+%{\par\scriptsizessp\def\@halignto{to#1}\@tabular}
+%\expandafter \let \csname endscriptsizetabular*\endcsname = \endtabular
 
 % MINIPAGE
 %  \@minipagerestore is called upon entry to a minipage environment to
@@ -738,14 +745,6 @@ by\par
                        #8}}\fi
      \@xsect{#5}}
 
-
-\newcounter {part}
-\newcounter {chapter}
-\newcounter {section}[chapter]
-\newcounter {subsection}[section]
-\newcounter {subsubsection}[subsection]
-\newcounter {paragraph}[subsubsection]
-\newcounter {subparagraph}[paragraph]
 
 % For any counter CTR, \theCTR is a macro that defines the printed
 % version of counter CTR.  It is defined in terms of the following
@@ -894,7 +893,7 @@ by\par
   \if@twocolumn\@restonecoltrue\onecolumn\fi
   \chapter*{\contentsname
         \@mkboth{\uppercase{\contentsname}}{\uppercase{\contentsname}}}%
-  {\ssp\@starttoc{toc}}\if@restonecol\twocolumn\fi}
+  {\singlespacing\@starttoc{toc}}\if@restonecol\twocolumn\fi}
 
 \def\l@part#1#2{\addpenalty{-\@highpenalty}%
    \addvspace{2.25em plus\p@}% space above part line
@@ -947,7 +946,7 @@ by\par
 % place. Presumably a TeXpert would have an elegant way to do this. RSB 3/14/00
 \hspace{-0.515in} \underline{\figurename} \hspace{5.2in} \underline{Page}
 
-   {\ssp\@starttoc{lof}}\if@restonecol
+   {\singlespacing\@starttoc{lof}}\if@restonecol
     \twocolumn\fi}
 
 \def\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
@@ -969,7 +968,7 @@ by\par
 % place. Presumably a TeXpert would have an elegant way to do this. RSB 3/14/00
 \hspace{-0.48in} \underline{\tablename} \hspace{5.21in} \underline{Page}
 
-   {\ssp\@starttoc{lot}}\if@restonecol
+   {\singlespacing\@starttoc{lot}}\if@restonecol
   \twocolumn\fi}
 
 \let\l@table\l@figure
@@ -1104,7 +1103,7 @@ by\par
 
 
 % Single-space footnotes.
-\long\def\@footnotetext#1{\insert\footins{\ssp\reset@font\footnotesize
+\long\def\@footnotetext#1{\insert\footins{\singlespacing\reset@font\footnotesize
     \interlinepenalty\interfootnotelinepenalty
     \splittopskip\footnotesep
     \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
@@ -1150,7 +1149,7 @@ by\par
    \par\ifdim\prevdepth>-\p@ \vskip 10\p@\relax \fi % above the caption
    \setbox\@tempboxa\hbox{\vbox to\topskip{}#1. #2\unskip\strut}% 
    \ifdim \wd\@tempboxa >\hsize      % IF longer than one line:
-       {\ssp#1. #2\unskip\strut\par} %   THEN set as ordinary paragraph.
+       {\singlespacing#1. #2\unskip\strut\par} %   THEN set as ordinary paragraph.
      \else                           %   ELSE  center.
        \hbox to\hsize{\hfil\unhbox\@tempboxa\hfil}%
    \fi}
@@ -1187,7 +1186,7 @@ by\par
 
 % FIGURE
 
-\newcounter{figure}[chapter]
+% \newcounter{figure}[chapter]
 \def\thefigure{\thechapter.\@arabic\c@figure}
 
 \def\fps@figure{tbp}
@@ -1201,7 +1200,7 @@ by\par
 
 % TABLE
 %
-\newcounter{table}[chapter]
+%\newcounter{table}[chapter]
 \def\thetable{\thechapter.\@arabic\c@table}
 
 \def\fps@table{tbp}
@@ -1361,103 +1360,6 @@ by\par
 \else
  \onecolumn                 % Single-column.
 \fi
-
-\endinput
-% UCTHESIS DOCUMENT CLASS -- Release info is below.
-%    for LaTeX version 2e - 11/3/94
-%% Modifed by John T. Whelan, June 1996, for UCSB use, following
-%% Chris Martin's changes to ucthesis.sty
-%%% ====================================================================
-%%%  @LaTeX-class-file{
-%%%     filename        = "ucthesis.cls",
-%%%     version         = "3.0",
-%%%     date            = "31 October 1994",
-%%%     portedby        = "Blaise B. Frederick",
-%%%     address         = "Center for Functional Imaging
-%%%                        Lawrence Berkeley Laboratory
-%%%                        MS 55-121
-%%%                        1 Cyclotron Rd.
-%%%                        Berkeley, CA 94720
-%%%                        USA",
-%%%     telephone       = "(510) 486-4423",
-%%%     email           = "frederic@imasun.lbl.gov",
-%%%     codetable       = "ISO/ASCII",
-%%%     keywords        = "LaTeX, ucthesis",
-%%%     supported       = "until November 30, 1994",
-%%%     docstring       = "This file is the main file for the ucthesis
-%%%                        class, which is intended to meet the requirements
-%%%                        for University of California Ph.D. dissertations.
-%%%                        It is a direct port to LaTeX2e from UCTHESIS
-%%%                        v2.7 by Ethan V. Munson, with no changes other 
-%%%                        than those for compatibility.  The major modifictions
-%%%                        are in the font selection commands in the option
-%%%                        files uct1x.clo.
-%%%                        
-%%%                        UCTHESIS.STY v2.7 is based on the standard
-%%%                        report.sty as modified by Mittelbach and Schopf in
-%%%                        Jan 1992.  The primary differences are (1) the use
-%%%                        of pseudo-double-spacing, except in certain special
-%%%                        environments; and (2) the use of a 6 inch line
-%%%                        with 4em paragraph indentation.  It is only
-%%%                        intended for single-sided printing.  Double-sided
-%%%                        printing may be possible, but you're on
-%%%                        your own.
-%%%
-%%%                        I know of no bugs in this implementation,
-%%%                        but would be happy to hear of any problems
-%%%                        that arise with it.
-%%%
-%%%                        Version 2.x fixes a bug in the previous
-%%%                        version of 20 Jun 1988.  The bug was that 
-%%%                        "draft" optional mode didn't work because of
-%%%                        problems in handling optional arguments.
-%%%                        This file does not seem to work with earlier 
-%%%                        versions of LaTeX (pre-Jan 1992).
-%%%
-%%%                        Version 2.3 includes a single-spaced 
-%%%                        tabular* environment.
-%%%                     
-%%%                        Version 2.4 sets \evensidemargin correctly
-%%%                        for two-sided style.  It also adds new
-%%%                        environments (\smalltabular and
-%%%                        \scriptsizetabular) which produce tables
-%%%                        with smaller fonts.  The obvious methods
-%%%                        of producing small-font tables don't work
-%%%                        in ucthesis style.
-%%%
-%%%                        Version 2.5 adds support for the \maketitle
-%%%                        macro.
-%%%
-%%%                        Version 2.6 adds support for complete and
-%%%                        correct front matter.  Some dead code was
-%%%                        removed, too.
-%%%
-%%%                        Version 2.7 adds front matter support for
-%%%                        thesis committees of more than 3 people
-%%%                        and for a labeled signature line on the
-%%%                        abstract page.
-%%%
-%%%                        Version 3.0 is a direct port of version 2.7
-%%%                        to LaTeX2e.  The major revisions in ucthesis.cls
-%%%                        are converting option processing to LaTeX2e 
-%%%                        conventions.  The uct1x files have been revised
-%%%                        to use the new font selection commands.
-%%%
-%%%                        Some users have had problems with the 
-%%%                        margins ending up too small on one side.
-%%%                        This appears to be a DVI-to-PostScript
-%%%                        driver or printer-adjustment problem.
-%%%                        If you have such trouble, make small adjustments
-%%%                        to the \textwidth and \oddsidemargin
-%%%                        settings in your document preamble.
-%%%                        
-%%%                        Another problem some people have had is
-%%%                        that you can't use \pagestyle{headings}
-%%%                        and \markboth if you use \part.  The solution
-%%%                        is to get the headerfooter style, which is
-%%%                        nice and simple to use."
-%%%  }
-%%% ====================================================================
 %    \end{macrocode}
 % \Finale
 \endinput
