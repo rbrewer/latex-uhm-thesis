@@ -1,0 +1,163 @@
+% \iffalse meta-comment
+%
+% This file is based on the cskeleton.dtx file provided by
+% Scott Pakin as part of the dtx tutorial and the uhthesis2e.cls
+% file created by Robert Brewer and several others. The eventual intent
+% is to release it under the GPLv3, but we need to be sure of the legal
+% issues first.  -- Mark Stillwell
+%
+%  Copyright (C) 2004 by Scott Pakin <scott+dtx@pakin.org>
+% -------------------------------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.2
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.2 or later is part of all distributions of LaTeX
+% version 1999/12/01 or later.
+
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{uhthesis.dtx}[2008/10/28 v0.1 uhthesis.dtx file]
+%</driver>
+%
+%<class>\NeedsTeXFormat{LaTeX2e}
+%<class>\ProvidesClass{uhthesis}
+%<class>    [2008/10/28 v0.1 uhthesis class]
+%
+%<*driver>
+\documentclass{ltxdoc}
+\EnableCrossrefs         
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{uhthesis.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v0.1}{2008/10/28}{Initial version, not for public release}
+%
+% \GetFileInfo{uhthesis.dtx}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+% 
+%
+% \title{The \textsf{uhthesis} class\thanks{This document corresponds to
+%   \textsf{uhthesis}~\fileversion, dated \filedate.}}
+% \author{Mark Stillwell \\ \texttt{markls@hawaii.edu}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% This file is the main file for the uhthesis class, which is intended to meet 
+% the requirements for University of Hawai`i Masters theses and Ph.D.
+% dissertations.
+%                        
+% This document class was based on the ``Style & Policy Manual For Theses and
+% Dissertations'' provided by the University of Hawai`i Graduate Division. The
+% version used says ``Revised April 2002'' inside the title page. It is your
+% responsibility to determine whether this style meets your needs.
+%
+% \section{Usage}
+%
+% Put text here.
+%
+% \DescribeMacro{\dummyMacro}
+% This macro does nothing.\index{doing nothing|usage} It is merely an
+% example.  If this were a real macro, you would put a paragraph here
+% describing what the macro is supposed to do, what its mandatory and
+% optional arguments are, and so forth.
+%
+% \DescribeEnv{dummyEnv}
+% This environment does nothing.  It is merely an example.
+% If this were a real environment, you would put a paragraph here
+% describing what the environment is supposed to do, what its
+% mandatory and optional arguments are, and so forth.
+%
+% \StopEventually{\PrintChanges\PrintIndex}
+%
+% \section{Implementation}
+%
+% This class is derived from the standard |report| class. Two-column thesis and
+% dissertations are not allowed at all, while twoside and paper formats other
+% than letter are only allowed in draft mode. The class also takes options for
+% single or double spacing, though again single spacing is only allowed in draft
+% mode.
+% \begin{macrocode}
+\newcommand\@proposalp{}
+\newcommand\@thesisp{}
+\newcommand\@draftp{}
+\newcommand\@doublespacep{}
+\newcommand\@twosidep{}
+\newcommand\@letterpaperp{}
+\DeclareOption{a4paper}{\renewcommand\@letterpaperp{false}
+    \PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{a5paper}{\renewcommand\@letterpaperp{false}
+    \PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{b5paper}{\renewcommand\@letterpaperp{false}
+    \PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{actual}{\renewcommand\@proposalp{false}}
+\DeclareOption{dissertation}{\renewcommand\@thesisp{false}}
+\DeclareOption{doublespacing}{\renewcommand\@doublespacep{true}
+    \PassOptionsToPackage{\CurrentOption}{setspace}}
+\DeclareOption{executivepaper}{\renewcommand\@letterpaperp{false}
+    \PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{letterpaper}{\renewcommand\@letterpaperp{true}
+    \PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{legalpaper}{\renewcommand\@letterpaperp{false}
+    \PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{oneside}{\renewcommand\@twosidep{false}
+    \PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{proposal}{\renewcommand\@proposalp{true}}
+\DeclareOption{singlespacing}{\renewcommand\@doublespacep{false}
+    \PassOptionsToPackage{singlespacing}{setspace}}
+\DeclareOption{thesis}{\renewcommand\@thesisp{true}}
+\DeclareOption{twocolumn}{\OptionNotUsed
+    \ClassWarning{uhthesis}{This class does not support the two column format}}
+\DeclareOption{twoside}{\renewcommand\@twosidep{true}
+    \PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+\ExecuteOptions{11pt,actual,doublespacing,letterpaper,onecolumn,oneside,final,
+    thesis}
+\ProcessOptions\relax
+\LoadClass[onecolumn]{report}
+% \end{macrocode}
+% This class requires the setspace, ifthen, and geometry packages.
+%
+% Margins are one-inch except on the binding side. On the binding side 1.5" is
+% required.
+% \begin{macrocode}
+\RequirePackage{setspace}
+\RequirePackage{ifthen}
+\RequirePackage[left=1.5in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+% \end{macrocode}
+%
+% \Finale
+\endinput
