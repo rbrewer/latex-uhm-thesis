@@ -109,9 +109,10 @@
 % than letter are only allowed in draft mode. The class also takes options for
 % single or double spacing, though again single spacing is only allowed in draft
 % mode.
-% \begin{macrocode}
-\newcommand\@doublespacep{}
-\newcommand\@draftp{}
+% 
+%    \begin{macrocode}
+\newcommand{\doublespacep}{}
+\newcommand{\@draftp}{}
 \newcommand\@englishp{}
 \newcommand\@letterpaperp{}
 \newcommand\@proposalp{}
@@ -156,18 +157,18 @@
     thesis}
 \ProcessOptions\relax
 \LoadClass[onecolumn]{report}
-% \end{macrocode}
+%    \end{macrocode}
 % This class requires the setspace, ifthen, and geometry packages.
 %
 % Margins are one-inch except on the binding side. On the binding side 1.5" is
 % required.
-% \begin{macrocode}
+%    \begin{macrocode}
 \RequirePackage{setspace}
 \RequirePackage{ifthen}
 \RequirePackage[left=1.5in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
-% \end{macrocode}
+%    \end{macrocode}
 %
-% \begin{macrocode}
+%    \begin{macrocode}
 \ifthenelse{\boolean{\@draftp}}{}{
     \ifthenelse{\boolean{\@doublespacep}}{}{
         \ClassWarningNoLine{uhthesis}{final drafts should be double spaced}
@@ -181,6 +182,6 @@
             one side}
     }{}
 }
-% \end{macrocode}
+%    \end{macrocode}
 % \Finale
 \endinput
