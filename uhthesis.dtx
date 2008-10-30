@@ -89,7 +89,7 @@
 %numeral page numbers, only the title page is unnumbered:
 %-- title page (no number)
 %-- signature page
-%-- copyright page          )
+%-- copyright page  (optional)
 %-- dedication page (optional)
 %-- acknowledgements (optional)
 %-- abstract
@@ -107,17 +107,6 @@
 %-- glossary (optional)
 %-- bibliography
 %-- index (optional)
-%
-%title page:
-%-- there must be an okina before the final "i" in Hawai`i
-%-- name
-%-- degree
-%-- field
-%-- graduation month \& year
-%-- committee members names, outside member's is usually last
-%-- do not include titles such as Dr., but the committee chair should be
-%designated "chairperson"
-%-- specialty, if any, in parenthesis after field
 %
 %signature page:
 %-- no title or heading
@@ -483,79 +472,106 @@
 % \end{macro}
 %
 % \begin{macro}{\maketitle}
-% outputs the complete title page. It requires all the
-% above macros. Based on the options provided, it will customize the
-% title page: thesis vs. dissertation, proposal vs. actual
+%title page:
+%-- there must be an okina before the final "i" in Hawai`i
+%-- name
+%-- degree
+%-- field
+%-- graduation month \& year
+%-- committee members names, outside member's is usually last
+%-- do not include titles such as Dr., but the committee chair should be
+%designated "chairperson"
+%-- specialty, if any, in parenthesis after field
+%
+% Outputs the complete title page. It requires all the above macros. Based on
+% the options provided, it will customize the title page: thesis vs.
+% dissertation, proposal vs. actual
 %
 % Set the font that will be used in the front matter headings
 % FIXME: subfield should display in parenthesis after field if specified
 %    \begin{macrocode}
 \def\fmfont{\fontsize\@xiipt{14.5}\selectfont}
 \def\fmsmallfont{\fontsize\@xiipt{14pt}\selectfont}
-\def\maketitle{
-{
-    \let\footnotesize\small
-    \let\footnoterule\relax
+\renewcommand{\maketitle}{
     \thispagestyle{empty}
-    \null\vfil
+    \singlespacing
     \begin{center}
+    \null
+    \vfill
     \fmfont
-    \uppercase\expandafter{\@title} \par
-    \bigskip \medskip
-    \vspace{6ex}%
+    \MakeUppercase{\@title}
+    \par
+    \bigskip 
+    \medskip
+    \vspace{6ex}
     \ifthenelse{\boolean{\@proposalp}}{
-      \ifthenelse{\boolean{\@thesisp}}{
-        A THESIS PROPOSAL SUBMITTED TO MY THESIS COMMITTEE \par}{
-        A DISSERTATION PROPOSAL SUBMITTED TO THE GRADUATE DIVISION \par
-        OF THE UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT \par
-        OF THE REQUIREMENTS FOR THE DEGREE OF \par}
+        \ifthenelse{\boolean{\@thesisp}}{
+            A THESIS PROPOSAL SUBMITTED TO MY THESIS COMMITTEE \par
+        }{
+            A DISSERTATION PROPOSAL SUBMITTED TO THE GRADUATE DIVISION \par
+            OF THE UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT \par
+            OF THE REQUIREMENTS FOR THE DEGREE OF \par
+        }
+    }{
+        \ifthenelse{\boolean{\@thesisp}}{
+            A THESIS SUBMITTED TO THE GRADUATE DIVISION OF THE \par
+            UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT \par
+            OF THE REQUIREMENTS FOR THE DEGREE OF \par
+        }{
+            A DISSERTATION SUBMITTED TO THE GRADUATE DIVISION OF THE \par
+            UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT \par
+            OF THE REQUIREMENTS FOR THE DEGREE OF \par
+        }
+    }
+    \bigskip
+    \MakeUppercase{\@degree}
+    \par
+    \bigskip
+    \medskip
+    IN
+    \par
+    \bigskip
+    \medskip
+    \MakeUppercase{\@field}
+    \par
+    \bigskip
+    \ifthenelse{\boolean{\@proposalp}}{
         \bigskip
-      \bigskip
-      \uppercase\expandafter{\@degree} \par
-      \bigskip \medskip
-      IN \par
-      \bigskip \medskip
-      \uppercase\expandafter{\@field} \par}{
-      \ifthenelse{\boolean{\@thesisp}}{
-        A THESIS SUBMITTED TO THE GRADUATE DIVISION OF THE \par
-        UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT \par
-        OF THE REQUIREMENTS FOR THE DEGREE OF \par}{
-        A DISSERTATION SUBMITTED TO THE GRADUATE DIVISION OF THE \par
-        UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT \par
-        OF THE REQUIREMENTS FOR THE DEGREE OF \par}
-      \bigskip
-      \uppercase\expandafter{\@degree} \par
-      \bigskip \medskip
-      IN \par
-      \bigskip \medskip
-      \uppercase\expandafter{\@field} \par
-      \bigskip \medskip
-      \uppercase\expandafter{\@degreemonth~\@degreeyear} \par}
-    \bigskip \bigskip \bigskip \bigskip
-    By \par
-    {\@author} \par
-    \bigskip \bigskip
-      \ifthenelse{\boolean{\@thesisp}}{
-        Thesis Committee: \par}{
-        Dissertation Committee: \par}
-      \bigskip \medskip
-      {\@chair}, Chairperson \par
-      {\@othermembers} \par
-    \ifthenelse{\boolean{\@proposalp}}{
-      \bigskip
-      \bigskip
-      \today \par
-      Version \@versionnum}{
-      \ifthenelse{\boolean{\@draftp}}{
-      \bigskip
-      \bigskip
-      \today \par
-      Version \@versionnum 
-      }}
-\end{center}
-    \vfil\null
-\setcounter{footnote}{0}
-}}
+    }{
+        \medskip
+        \MakeUppercase{\@degreemonth~\@degreeyear}
+        \par
+    }
+    \bigskip
+    \bigskip
+    By
+    \par
+    \@author
+    \par
+    \bigskip
+    \bigskip
+    \ifthenelse{\boolean{\@thesisp}}{
+        Thesis Committee:
+    }{
+        Dissertation Committee:
+    }
+    \par
+    \medskip
+    \@chair, Chairperson
+    \par
+    \@othermembers
+    \par
+    \ifthenelse{\boolean{\@proposalp}\or\boolean{\@draftp}}{
+        \bigskip
+        \bigskip
+        \today
+        \par
+        Version \@versionnum
+    }{}
+    \end{center}
+    \vfill
+    \cleardoublepage
+}
 %    \end{macrocode}
 % \end{macro}
 %
