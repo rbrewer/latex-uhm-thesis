@@ -32,6 +32,7 @@
 %
 %<*driver>
 \documentclass{ltxdoc}
+\usepackage{url}
 \EnableCrossrefs         
 \CodelineIndex
 \RecordChanges
@@ -65,7 +66,7 @@
 % \GetFileInfo{uhthesis.dtx}
 %
 % \DoNotIndex{\newcommand,\newenvironment}
-% 
+%
 % \title{The \textsf{uhthesis} class\thanks{This document corresponds to
 %   \textsf{uhthesis}~\fileversion, dated \filedate.}}
 % \author{Mark Stillwell \\ \texttt{markls@hawaii.edu}}
@@ -80,24 +81,181 @@
 %                        
 % This document class was based on the ``Style and Policy Manual For Theses and
 % Dissertations'' provided by the University of Hawai`i Graduate Division. The
-% version used says ``Revised April 2002'' inside the title page. It is your
-% responsibility to determine whether this style meets your needs.
+% version used says ``Revised April 2002'' inside the title
+% page~\cite{uhthesisstyle2002}. It is your responsibility to determine whether
+% this style meets your needs.
+%
+%the following pages must appear in the following order and have lower case roman
+%numeral page numbers, only the title page is unnumbered:
+%-- title page (no number)
+%-- signature page
+%-- copyright page          )
+%-- dedication page (optional)
+%-- acknowledgements (optional)
+%-- abstract
+%-- table of contents
+%-- list of tables
+%-- list of figures/illustrations/graphs/charts/maps/plates
+%-- list of abbreviations and symbols (optional)
+%-- preface (optional)
+%
+%text and other pages following preliminary pages are numbered using Arabic
+%numerals and must appear in the following order
+%-- text
+%-- appendices (if any)
+%-- notes (if any)
+%-- glossary (optional)
+%-- bibliography
+%-- index (optional)
+%
+%title page:
+%-- there must be an okina before the final "i" in Hawai`i
+%-- name
+%-- degree
+%-- field
+%-- graduation month \& year
+%-- committee members names, outside member's is usually last
+%-- do not include titles such as Dr., but the committee chair should be
+%designated "chairperson"
+%-- specialty, if any, in parenthesis after field
+%
+%signature page:
+%-- no title or heading
+%-- page number (ii) should appear consistent w/ rest of manuscript
+%-- name
+%-- degree
+%-- field
+%-- specialty, if any, in parenthesis after field
+%-- exactly as many blank lines for signatures as committee members
+%-- right margin 2 inches to prevent signing into the margin (suggested)
+%
+%acknowledgement page:
+%-- do not show author's name or date
+%
+%abstract page:
+%-- not required for thesis, required for dissertation
+%-- thesis abstract no more than 150 wds, dissertation no more than 350
+%-- double spaced
+%-- title "ABSTRACT"
+%
+%table of contents:
+%-- includes acknowledgements, abstract, list of tables, list of figures, list of
+%abbreviations and/or symbols, appendices, bibliography, and major sections of
+%the text, do not list title page, signature page, or dedication
+%-- must have dot leaders between end of heading and page number
+%-- word headings in toc must match those in the text precisely
+%-- each new sub-level must be indented to distinguish it from the previous level
+%
+%list of tables:
+%-- tables numbered using arabic numerals
+%-- titles may be shorter than they appear in the text so long as they are not
+%misleading
+%-- tables may either be numbered consecutively starting with 1, or using chapter
+%number . index
+%-- single space within titles longer than one line, but double space between
+%entries
+%-- requirements are otherwise the same as for the table of contents
+%
+%list of figures/etc:
+%-- figure numbers are done the same as table numbers, plate numbers with capital
+%roman numerals
+%-- if there are both figures and plates arrange them in separate lists
+%-- requirements are otherwise the same as for list of tables
+%
+%list of abbreviations and/or symbols:
+%
+%preface:
+%
+%text:
+%-- may be organized into either sections or chapters
+%-- if organized in chapters, each chapter must be titled and begin on a new page
+%-- chapter titles should be centered and consistently use the same size and
+%style of font
+%-- if dissertation is divided into "Parts" then each new part designation should
+%appear on a separate cover page. numbering for chapters does not begin anew for
+%each part.
+%
+%appendices:
+%-- may include schedules, lists, questionnaires, test, forms, case studies,
+%series of plates and figures, etc.
+%-- no cover pages, just center the title of the appendix on the first page
+%-- each type of material forms a separate appendix which must be labelled
+%separately
+%-- if there is only one appendix it must be titled "Appendix", not "Appendix A"
+%
+%bibliography:
+%-- should be a style that is professionally acceptable within the field
+%-- the heading "Literature Cited" may be used if it only contains references
+%actually cited
+%-- nothing not use in the preparation of the thesis/dissertation should be
+%included
+%
+%other formatting reqs:
+%-- page numbers either at top right or centered 1 inch from bottom
+%-- headings and subheadings must be consistent
+%-- major headings (acknowledgements, abstract, toc, list of tables, list of
+%figures, preface, chapter headings, appendices, and biography) should appear
+%centered at the top of a new page immediately followed by the text. chapter
+%headings only appear on the first page of a new chapter.
+%-- minor headings: each subheading level must be distinguished by a different
+%style, headings at the same sublevel must use the same style consistently
+%throughout the work, subheadings should not begin on a new page unless the
+%previous section ended at the bottom of a page.
+%-- 1", except inside margin 1.5" to make manuscript suitable for binding.
+%-- page numbers fall within margins
+%-- whitespace between words must be approximately even, and so full
+%justification is not recommended.
+%-- be consistent in the use of foreign words, italics or underlining is
+%recommended.  A quotation entirely in a foreign language should only appear in
+%quotation marks and not be italicized or underlined.
+%-- use of hawaiian words should be consistent
+%-- double spacing except where required otherwise
+%-- no widows or orphans
+%-- commas and periods should be placed within quotation marks
+%-- i.e. and e.g. should be followed by commas
+%-- no more than 3 hyphenations at the end of a line per page
+%-- no more than two consecutive lines with hyphens at the end.
+%-- every page should be numbered except the title and cover pages for parts
+%-- every page should be counted in the numbering
+%-- no text or marks around page numbers, no slash through zeros in page numbers
+%-- chapters may be designated either
+%    CHAPTER N       or CHAPTER N. BLAH BLAH
+%   BLAH BLAH
+%-- 10 point or larger font
+%-- print on one side of page only
+%-- 8.5x11 in
+%
+%
+%tables:
+%-- "Table" then a number, then a period, followed by caption and then contents
+%on next line
+%-- title can be flush left or centered, but must be consistent
+%-- can be all caps or mixed, but must be consistent
+%-- tables over half a page in length should appear on a separate page
+%-- wide tables may be placed broadside with title on binding side
+%-- tables may cover a number of pages in which case put " (Continued)" between
+%period and caption
+%-- footnotes should use symbols or letters, but not numbers and be placed at the
+%bottom of the table rather than the bottom of the page
+%
+%figures:
+%-- captions should appear below, even if figure is broadside
+%-- positioning rules are the same as those for tables
+%-- if rotated, top toward binding
+%
+%maps:
+%-- maps should have an accurate bar-type scale, some indication of lat \& long,
+%and a northward pointing arrow
 %
 % \section{Usage}
 %
 % Put text here.
 %
-% \DescribeMacro{\dummyMacro}
-% This macro does nothing.\index{doing nothing|usage} It is merely an
-% example.  If this were a real macro, you would put a paragraph here
-% describing what the macro is supposed to do, what its mandatory and
-% optional arguments are, and so forth.
+% \DescribeMacro{\signaturepage}
+% generates signature page
 %
-% \DescribeEnv{dummyEnv}
-% This environment does nothing.  It is merely an example.
-% If this were a real environment, you would put a paragraph here
-% describing what the environment is supposed to do, what its
-% mandatory and optional arguments are, and so forth.
+% \DescribeEnv{abstract}
+% abstract
 %
 % \StopEventually{\PrintChanges\PrintIndex}
 %
@@ -226,7 +384,7 @@
 % Other English words that need replacement can be found in the macros
 % supporting the title and signature pages.
 %
-% In the future we should probably use the babel package here.
+% FIXME:In the future we should probably use the babel package here.
 %
 %    \begin{macrocode}
 \newcommand{\acknowledgname}{Acknowledgments}
@@ -246,56 +404,54 @@
 }
 %    \end{macrocode}
 %
-%    ****************************************
-%    *             FRONT MATTER             *
-%    ****************************************
-%
-%
-% DECLARATIONS
-%
-% These macros are used to declare arguments needed for the
-% construction of the front matter.  
-%
 % \begin{macro}{\degreemonth}
-% The month the degree will be officially conferred, capitalized normally
+% The month the degree will be officially conferred, capitalized normally. The
+% default month is May since most students graduate at the end of the Spring
+% semester.
 %    \begin{macrocode}
-\def\degreemonth#1{\gdef\@degreemonth{#1}}
+\newcommand{\@degreemonth}{May}
+\newcommand{\degreemonth}[1]{\renewcommand{\@degreemonth}{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\degreeyear}
-% The year the degree will be officially conferred
+% The year the degree will be officially conferred.
 %    \begin{macrocode}
-\def\degreeyear#1{\gdef\@degreeyear{#1}}
+\newcommand{\@degreeyear}{1990}
+\newcommand{\degreeyear}[1]{\renewcommand{\@degreeyear}{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\degree}
-% The full (unabbreviated) name of the degree, capitalized normally
+% The full (unabbreviated) name of the degree, capitalized normally.
 %    \begin{macrocode}
-\def\degree#1{\gdef\@degree{#1}}
+\newcommand{\@degree}{Master of Science}
+\newcommand{\degree}[1]{\renewcommand{\@degree}{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\versionnum}
-% version of this draft only appears when in draft mode or a proposal.
+% The version of this draft only appears when in draft mode or a proposal.
 %    \begin{macrocode}
-\def\@versionnum{1.0.0}
-\def\versionnum#1{\gdef\@versionnum{#1}}
+\newcommand{\@versionnum}{1.0.0}
+\newcommand{\versionnum}[1]{\renewcommand{\@versionnum}{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\chair}
-% The name of your committee's chair
+% The name of your committee's chair.
 %    \begin{macrocode}
-\def\chair#1{\gdef\@chair{#1}}
+\newcommand{\@chair}{No Such Person}
+\newcommand{\chair}[1]{\renewcommand{\@chair}{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\othermembers}
-% The names of your other committee members, one per line
+% The names of your other committee members, one per line.
+% FIXME: really should be able to figure out number of members from this.
 %    \begin{macrocode}
-\def\othermembers#1{\gdef\@othermembers{#1}}
+\newcommand{\@othermembers}{}
+\newcommand{\othermembers}[1]{\renewcommand{\@othermembers}{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -303,17 +459,26 @@
 % The number of committee members, which affects the number of lines
 % on the signature page.
 %    \begin{macrocode}
-\def\@numberofmembers{3}
-\def\numberofmembers#1{\gdef\@numberofmembers{#1}}
+\newcommand{\@numberofmembers}{3}
+\newcommand{\numberofmembers}[1]{\renewcommand{\@numberofmembers}{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\field}
 % The name of your degree's field (e.g. Psychology, Computer Science),
 % capitalized normally.
-% FIXME: add optional specialization
 %    \begin{macrocode}
-\def\field#1{\gdef\@field{#1}}
+\newcommand{\@field}{}
+\newcommand{\field}[1]{\renewcommand{\@field}{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\subfield}
+% The name of your degree's field (e.g. Psychology, Computer Science),
+% capitalized normally.
+%    \begin{macrocode}
+\newcommand{\@subfield}{}
+\newcommand{\subfield}[1]{\renewcommand{\@subfield}{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -323,17 +488,15 @@
 % title page: thesis vs. dissertation, proposal vs. actual
 %
 % Set the font that will be used in the front matter headings
+% FIXME: subfield should display in parenthesis after field if specified
 %    \begin{macrocode}
 \def\fmfont{\fontsize\@xiipt{14.5}\selectfont}
 \def\fmsmallfont{\fontsize\@xiipt{14pt}\selectfont}
-
 \def\maketitle{
 {
     \let\footnotesize\small
     \let\footnoterule\relax
     \thispagestyle{empty}
-    \setcounter{page}{1}
-
     \null\vfil
     \begin{center}
     \fmfont
@@ -409,7 +572,6 @@
 \ifthenelse{\boolean{\@proposalp}}{}{
     \ifthenelse{\boolean{\@draftp}}{}{
       \setlength{\rightskip}{1in}
-      \setcounter{page}{2}
       \null\vfill
       \fmfont
       \noindent
@@ -487,10 +649,10 @@ by\par
 % The ABSTRACT environment allows for multi-page abstracts.
 %
 %    \begin{macrocode}
-\def\abstract{
-\chapter*{\abstractname}
-\addcontentsline{toc}{chapter}{\abstractname}
-}
+\renewenvironment{abstract}{
+    \chapter*{\abstractname}
+    \addcontentsline{toc}{chapter}{\abstractname}
+}{}
 %    \end{macrocode}
 % \end{environment}
 %
@@ -508,8 +670,8 @@ by\par
 % "Acknowledgments" label at the top of the page.
 %    \begin{macrocode}
 \newenvironment{acknowledgments}{
-\chapter*{\acknowledgname}
-\addcontentsline{toc}{chapter}{\acknowledgname}
+    \chapter*{\acknowledgname}
+    \addcontentsline{toc}{chapter}{\acknowledgname}
 }{}
 %    \end{macrocode}
 % \end{environment}
@@ -522,17 +684,19 @@ by\par
 %
 %    \begin{macrocode}
 \newenvironment{frontmatter}{
+    \newpage
+    \pagenumbering{roman}
     \setcounter{page}{2}
-    \renewcommand{\thepage}{\roman{page}}
-    \pagestyle{plain}
 }{
     \newpage
-    \renewcommand{\thepage}{\arabic{page}}
+    \pagenumbering{arabic}
     \setcounter{page}{1}
-    \pagestyle{headings}
 }
 %    \end{macrocode}
 % \end{environment}
+%
+% \bibliographystyle{plain}
+% \bibliography{uhthesis}
 %
 % \Finale
 \endinput
