@@ -106,23 +106,6 @@
 %-- bibliography
 %-- index (optional)
 %
-%acknowledgement page:
-%-- do not show author's name or date
-%
-%abstract page:
-%-- not required for thesis, required for dissertation
-%-- thesis abstract no more than 150 wds, dissertation no more than 350
-%-- double spaced
-%-- title "ABSTRACT"
-%
-%table of contents:
-%-- includes acknowledgements, abstract, list of tables, list of figures, list of
-%abbreviations and/or symbols, appendices, bibliography, and major sections of
-%the text, do not list title page, signature page, or dedication
-%-- must have dot leaders between end of heading and page number
-%-- word headings in toc must match those in the text precisely
-%-- each new sub-level must be indented to distinguish it from the previous level
-%
 %list of tables:
 %-- tables numbered using arabic numerals
 %-- titles may be shorter than they appear in the text so long as they are not
@@ -504,7 +487,8 @@
     \vspace{4ex}\par
     IN\par
     \vspace{4ex}\par
-    \MakeUppercase{\@field}\par
+    \MakeUppercase{\@field}
+    \ifthenelse{\equal{\@subfield}{}}{}{(\MakeUppercase{\@subfield})}\par
     \vspace{4ex}\par
     \ifthenelse{\boolean{\@proposalp}}{
         \vspace{4ex}\par
@@ -514,6 +498,7 @@
     }
     \vspace{8ex}\par
     By\par
+    \vspace{2ex}\par
     \@author\par
     \vspace{8ex}\par
     \ifthenelse{\boolean{\@thesisp}}{
@@ -542,6 +527,8 @@
 % then this page will not put output. Therefore it is safe to include
 % in the document at all stages and control its presence with the
 % options. 
+% FIXME: really should use some sort of looping structure to print out
+% sig lines
 %
 %signature page:
 %-- no title or heading
@@ -559,40 +546,41 @@
         \singlespacing
         \Large
         \null\vspace{4ex}\par
+        \noindent We certify that we have read this
+        \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} and that, in
+        our opinion, it is satisfactory in scope and quality as a
+        \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} for the
+        degree of {\@degree} in {\@field} 
+        \ifthenelse{\equal{\@subfield}{}}{}{(\@subfield)}.\par
+        \vspace{8ex}\par
         \parbox[l]{5in}{
-            \noindent We certify that we have read this
-            \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} and that, in
-            our opinion, it is satisfactory in scope and quality as a
-            \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} for the
-            degree of {\@degree} in {\@field}.\par
-            \vspace{2ex}\par
             \begin{flushright}
                 \begin{minipage}{2.7in}
                     \begin{center}
                         \ifthenelse{\boolean{\@thesisp}}{THESIS}{DISSERTATION}
                         COMMITTEE\par
                         ~\par
-                        \vspace{3ex}\par
+                        \vspace{4ex}\par
                         \rule{2.5in}{.01in}\par
                         Chairperson\par
-                        \vspace{3ex}\par
+                        \vspace{4ex}\par
                         \rule{2.5in}{.01in}\par
                         ~\par
-                        \vspace{3ex}\par
+                        \vspace{4ex}\par
                         \rule{2.5in}{.01in}\par
                         \ifnum \@numberofmembers > 3
                             ~\par
-                            \vspace{3ex}\par
+                            \vspace{4ex}\par
                             \rule{2.5in}{.01in}\par
                         \fi
                         \ifnum \@numberofmembers > 4
                             ~\par
-                            \vspace{3ex}\par
+                            \vspace{4ex}\par
                             \rule{2.5in}{.01in}\par
                         \fi
                         \ifnum \@numberofmembers > 5
                             ~\par
-                            \vspace{3ex}\par
+                            \vspace{4ex}\par
                             \rule{2.5in}{.01in}\par
                         \fi
                     \end{center}
@@ -614,13 +602,9 @@
 \newcommand\copyrightpage{
     \singlespacing
     \Large
-    \null\vspace{6in}\par
+    \null\vspace{12ex}\par
     \begin{center}
-        \copyright Copyright \@degreeyear\par
-        \vspace{2ex}\par
-        by\par
-        \vspace{2ex}\par
-        \@author\par
+        Copyright \@degreeyear \@author\par
     \end{center}
     \cleardoublepage
 }
@@ -629,6 +613,12 @@
 %
 % \begin{environment}{abstract}
 % The ABSTRACT environment allows for multi-page abstracts.
+%abstract page:
+%-- not required for thesis, required for dissertation
+%-- thesis abstract no more than 150 wds, dissertation no more than 350
+%-- double spaced
+%-- title "ABSTRACT"
+% FIXME: really should be able to check for presence of abs in dissertation
 %
 %    \begin{macrocode}
 \renewenvironment{abstract}{
@@ -651,9 +641,13 @@
 %    \end{macrocode}
 % \end{environment}
 %
-% \begin{environment}{dedication}
+% \begin{environment}{acknowldedgments}
 % The acknowledgments environment puts a large, bold, centered 
 % "Acknowledgments" label at the top of the page.
+%acknowledgement page:
+%-- roman numeral line numbering
+%-- do not show author's name or date
+%-- should show up in toc
 %    \begin{macrocode}
 \newenvironment{acknowledgments}{
     \chapter*{\acknowledgname}
@@ -663,6 +657,18 @@
 }
 %    \end{macrocode}
 % \end{environment}
+%
+%table of contents:
+%-- includes acknowledgements, abstract, list of tables, list of figures, list of
+%abbreviations and/or symbols, appendices, bibliography, and major sections of
+%the text, do not list title page, signature page, or dedication
+%-- must have dot leaders between end of heading and page number
+%-- word headings in toc must match those in the text precisely
+%-- each new sub-level must be indented to distinguish it from the previous level
+%    \begin{macrocode}
+%\RequirePackage[nottoc]{tocbibind}
+%\RequirePackage{tocloft}
+%    \end{macrocode}
 %
 % \begin{environment}{frontmatter}
 % The FRONTMATTER environment makes sure that page numbering is set
