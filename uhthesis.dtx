@@ -1,23 +1,21 @@
 % \iffalse meta-comment
 %
-% This file is based on the cskeleton.dtx file provided by
-% Scott Pakin as part of the dtx tutorial and the uhthesis2e.cls
-% file created by Robert Brewer and several others. The eventual intent
-% is to release it under the GPLv3, but we need to be sure of the legal
-% issues first.  -- Mark Stillwell
+% This file is part of the uhthesis latex class. It is based partially on the
+% dtx tutorial by Scott Pakin (Copyright 2004) and the uhthesis2e class file by
+% Carleton A. Moore and Robert S. Brewer (Copyright 1998). Additional changes by
+% Mark L. Stillwell (Copyright 2008).
 %
-%  Copyright (C) 2004 by Scott Pakin <scott+dtx@pakin.org>
-% -------------------------------------------------------
+% This program is free software: you can redistribute it and/or modify it under
+% the terms of the GNU General Public License as published by the Free Software
+% Foundation, either version 3 of the License, or (at your option) any later
+% version.
+
+% This program is distributed in the hope that it will be useful, but WITHOUT
+% ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+% FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 %
-% This file may be distributed and/or modified under the
-% conditions of the LaTeX Project Public License, either version 1.2
-% of this license or (at your option) any later version.
-% The latest version of this license is in:
-%
-%    http://www.latex-project.org/lppl.txt
-%
-% and version 1.2 or later is part of all distributions of LaTeX
-% version 1999/12/01 or later.
+% You should have received a copy of the GNU General Public License along with
+% this program.  If not, see <http://www.gnu.org/licenses/>.
 %
 % \fi
 %
@@ -107,16 +105,6 @@
 %-- glossary (optional)
 %-- bibliography
 %-- index (optional)
-%
-%signature page:
-%-- no title or heading
-%-- page number (ii) should appear consistent w/ rest of manuscript
-%-- name
-%-- degree
-%-- field
-%-- specialty, if any, in parenthesis after field
-%-- exactly as many blank lines for signatures as committee members
-%-- right margin 2 inches to prevent signing into the margin (suggested)
 %
 %acknowledgement page:
 %-- do not show author's name or date
@@ -276,10 +264,7 @@
 }
 \DeclareOption{actual}{\renewcommand{\@proposalp}{false}}
 \DeclareOption{dissertation}{\renewcommand{\@thesisp}{false}}
-\DeclareOption{doublespacing}{
-    \renewcommand{\@doublespacep}{true}
-    \PassOptionsToPackage{\CurrentOption}{setspace}
-}
+\DeclareOption{doublespacing}{\renewcommand{\@doublespacep}{true}}
 \DeclareOption{draft}{
     \renewcommand{\@draftp}{true}
     \PassOptionsToClass{\CurrentOption}{report}
@@ -310,10 +295,7 @@
     \PassOptionsToClass{\CurrentOption}{report}
 }
 \DeclareOption{proposal}{\renewcommand{\@proposalp}{true}}
-\DeclareOption{singlespacing}{
-    \renewcommand{\@doublespacep}{false}
-    \PassOptionsToPackage{singlespacing}{setspace}
-}
+\DeclareOption{singlespacing}{\renewcommand{\@doublespacep}{false}}
 \DeclareOption{thesis}{\renewcommand{\@thesisp}{true}}
 \DeclareOption{twocolumn}{
     \OptionNotUsed
@@ -490,86 +472,64 @@
 % Set the font that will be used in the front matter headings
 % FIXME: subfield should display in parenthesis after field if specified
 %    \begin{macrocode}
-\def\fmfont{\fontsize\@xiipt{14.5}\selectfont}
-\def\fmsmallfont{\fontsize\@xiipt{14pt}\selectfont}
 \renewcommand{\maketitle}{
     \thispagestyle{empty}
     \singlespacing
+    \Large
+    \null\vspace{8ex}\par
     \begin{center}
-    \null
-    \vfill
-    \fmfont
-    \MakeUppercase{\@title}
-    \par
-    \bigskip 
-    \medskip
-    \vspace{6ex}
+    \MakeUppercase{\@title}\par
+    \vspace{4ex}\par
     \ifthenelse{\boolean{\@proposalp}}{
         \ifthenelse{\boolean{\@thesisp}}{
-            A THESIS PROPOSAL SUBMITTED TO MY THESIS COMMITTEE \par
+            A THESIS PROPOSAL SUBMITTED TO MY THESIS COMMITTEE\par
         }{
-            A DISSERTATION PROPOSAL SUBMITTED TO THE GRADUATE DIVISION \par
-            OF THE UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT \par
-            OF THE REQUIREMENTS FOR THE DEGREE OF \par
+            A DISSERTATION PROPOSAL SUBMITTED TO THE GRADUATE DIVISION\par
+            OF THE UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT\par
+            OF THE REQUIREMENTS FOR THE DEGREE OF\par
         }
     }{
         \ifthenelse{\boolean{\@thesisp}}{
-            A THESIS SUBMITTED TO THE GRADUATE DIVISION OF THE \par
-            UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT \par
-            OF THE REQUIREMENTS FOR THE DEGREE OF \par
+            A THESIS SUBMITTED TO THE GRADUATE DIVISION OF THE\par
+            UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT\par
+            OF THE REQUIREMENTS FOR THE DEGREE OF\par
         }{
-            A DISSERTATION SUBMITTED TO THE GRADUATE DIVISION OF THE \par
-            UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT \par
-            OF THE REQUIREMENTS FOR THE DEGREE OF \par
+            A DISSERTATION SUBMITTED TO THE GRADUATE DIVISION OF THE\par
+            UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT\par
+            OF THE REQUIREMENTS FOR THE DEGREE OF\par
         }
     }
-    \bigskip
-    \MakeUppercase{\@degree}
-    \par
-    \bigskip
-    \medskip
-    IN
-    \par
-    \bigskip
-    \medskip
-    \MakeUppercase{\@field}
-    \par
-    \bigskip
+    \vspace{4ex}\par
+    \MakeUppercase{\@degree}\par
+    \vspace{4ex}\par
+    IN\par
+    \vspace{4ex}\par
+    \MakeUppercase{\@field}\par
+    \vspace{4ex}\par
     \ifthenelse{\boolean{\@proposalp}}{
-        \bigskip
+        \vspace{4ex}\par
     }{
-        \medskip
-        \MakeUppercase{\@degreemonth~\@degreeyear}
-        \par
+        \vspace{2ex}\par
+        \MakeUppercase{\@degreemonth~\@degreeyear}\par
     }
-    \bigskip
-    \bigskip
-    By
-    \par
-    \@author
-    \par
-    \bigskip
-    \bigskip
+    \vspace{8ex}\par
+    By\par
+    \@author\par
+    \vspace{8ex}\par
     \ifthenelse{\boolean{\@thesisp}}{
-        Thesis Committee:
+        Thesis Committee:\par
     }{
-        Dissertation Committee:
+        Dissertation Committee:\par
     }
-    \par
-    \medskip
-    \@chair, Chairperson
-    \par
-    \@othermembers
-    \par
+    \vspace{2ex}\par
+    \@chair, Chairperson\par
+    \@othermembers\par
     \ifthenelse{\boolean{\@proposalp}\or\boolean{\@draftp}}{
-        \bigskip
-        \bigskip
-        \today
-        \par
+        \vspace{8ex}\par
+        \today\par
         Version \@versionnum
     }{}
     \end{center}
-    \vfill
     \cleardoublepage
 }
 %    \end{macrocode}
@@ -583,61 +543,65 @@
 % in the document at all stages and control its presence with the
 % options. 
 %
+%signature page:
+%-- no title or heading
+%-- page number (ii) should appear consistent w/ rest of manuscript
+%-- name
+%-- degree
+%-- field
+%-- specialty, if any, in parenthesis after field
+%-- exactly as many blank lines for signatures as committee members
+%-- right margin 2 inches to prevent signing into the margin (suggested)
+%
 %    \begin{macrocode}
-\def\signaturepage{
-\ifthenelse{\boolean{\@proposalp}}{}{
-    \ifthenelse{\boolean{\@draftp}}{}{
-      \setlength{\rightskip}{1in}
-      \null\vfill
-      \fmfont
-      \noindent
-      We certify that we have read this
-      \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation}
-      and that, in our opinion, it is satisfactory in scope and quality as a
-      \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} for the degree of
-      {\@degree} in {\@field}. \par
-      \vspace*{1.5in}
-      
-      \begin{flushright}
-        \setlength{\rightskip}{1in}
-        \begin{minipage}{2.7in}
-          \begin{center}
-            \ifthenelse{\boolean{\@thesisp}}{THESIS}{DISSERTATION} COMMITTEE
-            
-            \vspace{0.3in}
-            \rule{2.5in}{.01in}
-            
-            \setlength{\baselineskip}{4pt}
-            Chairperson
-            
-            \vspace*{0.5in}
-            \rule{2.5in}{.01in}
-            
-            \vspace{0.5in}
-            \rule{2.5in}{.01in}
-            
-            \ifnum \@numberofmembers > 3
-            \vspace{0.5in}
-            \rule{2.5in}{.01in}
-            \fi
-            
-            \ifnum \@numberofmembers > 4
-            \vspace{0.5in}
-            \rule{2.5in}{.01in}
-            \fi
-            
-            \ifnum \@numberofmembers > 5
-            \vspace{0.5in}
-            \rule{2.5in}{.01in}
-            \fi
-            
-          \end{center}
-        \end{minipage}
-      \end{flushright}
-      \vfill\null
+\newcommand\signaturepage{
+    \ifthenelse{\boolean{\@proposalp}\or\boolean{\@draftp}}{}{
+        \singlespacing
+        \Large
+        \null\vspace{4ex}\par
+        \parbox[l]{5in}{
+            \noindent We certify that we have read this
+            \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} and that, in
+            our opinion, it is satisfactory in scope and quality as a
+            \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} for the
+            degree of {\@degree} in {\@field}.\par
+            \vspace{2ex}\par
+            \begin{flushright}
+                \begin{minipage}{2.7in}
+                    \begin{center}
+                        \ifthenelse{\boolean{\@thesisp}}{THESIS}{DISSERTATION}
+                        COMMITTEE\par
+                        ~\par
+                        \vspace{3ex}\par
+                        \rule{2.5in}{.01in}\par
+                        Chairperson\par
+                        \vspace{3ex}\par
+                        \rule{2.5in}{.01in}\par
+                        ~\par
+                        \vspace{3ex}\par
+                        \rule{2.5in}{.01in}\par
+                        \ifnum \@numberofmembers > 3
+                            ~\par
+                            \vspace{3ex}\par
+                            \rule{2.5in}{.01in}\par
+                        \fi
+                        \ifnum \@numberofmembers > 4
+                            ~\par
+                            \vspace{3ex}\par
+                            \rule{2.5in}{.01in}\par
+                        \fi
+                        \ifnum \@numberofmembers > 5
+                            ~\par
+                            \vspace{3ex}\par
+                            \rule{2.5in}{.01in}\par
+                        \fi
+                    \end{center}
+                \end{minipage}
+            \end{flushright}
+        }
     }
-    }
-  }
+    \cleardoublepage
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -647,16 +611,18 @@
 % from the degreeyear macro.
 %
 %    \begin{macrocode}
-\def\copyrightpage{
-\begin{center}
-{\fmfont
-\vspace*{7in}
-\copyright Copyright \@degreeyear\par
-\vspace{.1in}
-by\par
-\vspace{.1in}
-\@author}
-\end{center}
+\newcommand\copyrightpage{
+    \singlespacing
+    \Large
+    \null\vspace{6in}\par
+    \begin{center}
+        \copyright Copyright \@degreeyear\par
+        \vspace{2ex}\par
+        by\par
+        \vspace{2ex}\par
+        \@author\par
+    \end{center}
+    \cleardoublepage
 }
 %    \end{macrocode}
 % \end{macro}
@@ -668,7 +634,9 @@ by\par
 \renewenvironment{abstract}{
     \chapter*{\abstractname}
     \addcontentsline{toc}{chapter}{\abstractname}
-}{}
+}{
+    \cleardoublepage
+}
 %    \end{macrocode}
 % \end{environment}
 %
@@ -677,7 +645,9 @@ by\par
 % own page.
 %
 %    \begin{macrocode}
-\newenvironment{dedication}{}{}
+\newenvironment{dedication}{}{
+    \cleardoublepage
+}
 %    \end{macrocode}
 % \end{environment}
 %
@@ -688,7 +658,9 @@ by\par
 \newenvironment{acknowledgments}{
     \chapter*{\acknowledgname}
     \addcontentsline{toc}{chapter}{\acknowledgname}
-}{}
+}{
+    \cleardoublepage
+}
 %    \end{macrocode}
 % \end{environment}
 %
@@ -700,11 +672,9 @@ by\par
 %
 %    \begin{macrocode}
 \newenvironment{frontmatter}{
-    \newpage
     \pagenumbering{roman}
     \setcounter{page}{2}
 }{
-    \newpage
     \pagenumbering{arabic}
     \setcounter{page}{1}
 }
