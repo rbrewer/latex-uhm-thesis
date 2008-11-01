@@ -106,22 +106,6 @@
 %-- bibliography
 %-- index (optional)
 %
-%list of tables:
-%-- tables numbered using arabic numerals
-%-- titles may be shorter than they appear in the text so long as they are not
-%misleading
-%-- tables may either be numbered consecutively starting with 1, or using chapter
-%number . index
-%-- single space within titles longer than one line, but double space between
-%entries
-%-- requirements are otherwise the same as for the table of contents
-%
-%list of figures/etc:
-%-- figure numbers are done the same as table numbers, plate numbers with capital
-%roman numerals
-%-- if there are both figures and plates arrange them in separate lists
-%-- requirements are otherwise the same as for list of tables
-%
 %list of abbreviations and/or symbols:
 %
 %preface:
@@ -247,7 +231,10 @@
 }
 \DeclareOption{actual}{\renewcommand{\@proposalp}{false}}
 \DeclareOption{dissertation}{\renewcommand{\@thesisp}{false}}
-\DeclareOption{doublespacing}{\renewcommand{\@doublespacep}{true}}
+\DeclareOption{doublespacing}{
+    \renewcommand{\@doublespacep}{true}
+    \PassOptionsToClass{\CurrentOption}{setspace}
+}
 \DeclareOption{draft}{
     \renewcommand{\@draftp}{true}
     \PassOptionsToClass{\CurrentOption}{report}
@@ -263,7 +250,7 @@
 }
 \DeclareOption{hawaiian}{
     \renewcommand{\@englishp}{false}
-    \ClassWarningNoLine{uhthesis}
+    \ClassErrorNoLine{uhthesis}
         {The ``hawaiian'' option is not supported at this time}}
 \DeclareOption{letterpaper}{
     \renewcommand{\@letterpaperp}{true}
@@ -278,7 +265,10 @@
     \PassOptionsToClass{\CurrentOption}{report}
 }
 \DeclareOption{proposal}{\renewcommand{\@proposalp}{true}}
-\DeclareOption{singlespacing}{\renewcommand{\@doublespacep}{false}}
+\DeclareOption{singlespacing}{
+    \renewcommand{\@doublespacep}{false}
+    \PassOptionsToClass{\CurrentOption}{setspace}
+}
 \DeclareOption{thesis}{\renewcommand{\@thesisp}{true}}
 \DeclareOption{twocolumn}{
     \OptionNotUsed
@@ -453,66 +443,64 @@
 % Set the font that will be used in the front matter headings
 % FIXME: subfield should display in parenthesis after field if specified
 %    \begin{macrocode}
+\newcommand{\@papertype}{}
+\ifthenelse{\boolean{\@thesisp}}{
+    \renewcommand{\@papertype}{Thesis}
+}{
+    \renewcommand{\@papertype}{Dissertation}
+}
 \renewcommand{\maketitle}{
     \thispagestyle{empty}
-    \singlespacing
-    \Large
-    \null\vspace{8ex}\par
+    \begin{Large}
+    \begin{singlespacing}
     \begin{center}
-    \MakeUppercase{\@title}\par
-    \vspace{4ex}\par
-    \ifthenelse{\boolean{\@proposalp}}{
-        \ifthenelse{\boolean{\@thesisp}}{
-            A THESIS PROPOSAL SUBMITTED TO MY THESIS COMMITTEE\par
-        }{
-            A DISSERTATION PROPOSAL SUBMITTED TO THE GRADUATE DIVISION\par
-            OF THE UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT\par
-            OF THE REQUIREMENTS FOR THE DEGREE OF\par
-        }
-    }{
-        \ifthenelse{\boolean{\@thesisp}}{
-            A THESIS SUBMITTED TO THE GRADUATE DIVISION OF THE\par
-            UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT\par
-            OF THE REQUIREMENTS FOR THE DEGREE OF\par
-        }{
-            A DISSERTATION SUBMITTED TO THE GRADUATE DIVISION OF THE\par
-            UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT\par
-            OF THE REQUIREMENTS FOR THE DEGREE OF\par
-        }
-    }
-    \vspace{4ex}\par
-    \MakeUppercase{\@degree}\par
-    \vspace{4ex}\par
-    IN\par
-    \vspace{4ex}\par
-    \MakeUppercase{\@field}
-    \ifthenelse{\equal{\@subfield}{}}{}{(\MakeUppercase{\@subfield})}\par
-    \vspace{4ex}\par
-    \ifthenelse{\boolean{\@proposalp}}{
+        \null\vspace{8ex}\par
+        \MakeUppercase{\@title}\par
         \vspace{4ex}\par
-    }{
-        \vspace{2ex}\par
-        \MakeUppercase{\@degreemonth~\@degreeyear}\par
-    }
-    \vspace{8ex}\par
-    By\par
-    \vspace{2ex}\par
-    \@author\par
-    \vspace{8ex}\par
-    \ifthenelse{\boolean{\@thesisp}}{
-        Thesis Committee:\par
-    }{
-        Dissertation Committee:\par
-    }
-    \vspace{2ex}\par
-    \@chair, Chairperson\par
-    \@othermembers\par
-    \ifthenelse{\boolean{\@proposalp}\or\boolean{\@draftp}}{
+        \ifthenelse{\boolean{\@proposalp}}{
+            \ifthenelse{\boolean{\@thesisp}}{
+                A THESIS PROPOSAL SUBMITTED TO MY THESIS COMMITTEE\par
+            }{
+                A DISSERTATION PROPOSAL SUBMITTED TO THE GRADUATE DIVISION\par
+                OF THE UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT\par
+                OF THE REQUIREMENTS FOR THE DEGREE OF\par
+            }
+        }{
+            A \MakeUppercase{\@papertype} SUBMITTED TO THE GRADUATE DIVISION OF THE\par
+            UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT\par
+            OF THE REQUIREMENTS FOR THE DEGREE OF\par
+        }
+        \vspace{4ex}\par
+        \MakeUppercase{\@degree}\par
+        \vspace{4ex}\par
+        IN\par
+        \vspace{4ex}\par
+        \MakeUppercase{\@field}
+        \ifthenelse{\equal{\@subfield}{}}{}{(\MakeUppercase{\@subfield})}\par
+        \vspace{4ex}\par
+        \ifthenelse{\boolean{\@proposalp}}{
+            \vspace{4ex}\par
+        }{
+            \vspace{2ex}\par
+            \MakeUppercase{\@degreemonth~\@degreeyear}\par
+        }
         \vspace{8ex}\par
-        \today\par
-        Version \@versionnum
-    }{}
+        By\par
+        \vspace{2ex}\par
+        \@author\par
+        \vspace{8ex}\par
+        \@papertype Committee:\par
+        \vspace{2ex}\par
+        \@chair, Chairperson\par
+        \@othermembers\par
+        \ifthenelse{\boolean{\@proposalp}\or\boolean{\@draftp}}{
+            \vspace{8ex}\par
+            \today\par
+            Version \@versionnum
+        }{}
     \end{center}
+    \end{singlespacing}
+    \end{Large}
     \cleardoublepage
 }
 %    \end{macrocode}
@@ -541,52 +529,51 @@
 %    \begin{macrocode}
 \newcommand\signaturepage{
     \ifthenelse{\boolean{\@proposalp}\or\boolean{\@draftp}}{}{
-        \singlespacing
-        \Large
-        \null\vspace{4ex}\par
-        \noindent We certify that we have read this
-        \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} and that, in
-        our opinion, it is satisfactory in scope and quality as a
-        \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} for the
-        degree of {\@degree} in {\@field} 
-        \ifthenelse{\equal{\@subfield}{}}{}{(\@subfield)}.\par
-        \vspace{8ex}\par
-        \parbox[l]{5in}{
-            \begin{flushright}
-                \begin{minipage}{2.7in}
-                    \begin{center}
-                        \ifthenelse{\boolean{\@thesisp}}{THESIS}{DISSERTATION}
-                        COMMITTEE\par
-                        ~\par
-                        \vspace{4ex}\par
-                        \rule{2.5in}{.01in}\par
-                        Chairperson\par
-                        \vspace{4ex}\par
-                        \rule{2.5in}{.01in}\par
-                        ~\par
-                        \vspace{4ex}\par
-                        \rule{2.5in}{.01in}\par
-                        \ifnum \@numberofmembers > 3
+        \begin{Large}
+            \null\vspace{4ex}\par
+            \noindent We certify that we have read this
+            \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} and that, in
+            our opinion, it is satisfactory in scope and quality as a
+            \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} for the
+            degree of {\@degree} in {\@field}
+            \ifthenelse{\equal{\@subfield}{}}{}{(\@subfield)}.\par
+            \vspace{8ex}\par
+            \parbox[l]{5in}{
+                \begin{flushright}
+                    \begin{minipage}{2.7in}
+                        \begin{center}
+                            \MakeUppercase{\@papertype} COMMITTEE\par
                             ~\par
                             \vspace{4ex}\par
                             \rule{2.5in}{.01in}\par
-                        \fi
-                        \ifnum \@numberofmembers > 4
+                            Chairperson\par
+                            \vspace{4ex}\par
+                            \rule{2.5in}{.01in}\par
                             ~\par
                             \vspace{4ex}\par
                             \rule{2.5in}{.01in}\par
-                        \fi
-                        \ifnum \@numberofmembers > 5
-                            ~\par
-                            \vspace{4ex}\par
-                            \rule{2.5in}{.01in}\par
-                        \fi
-                    \end{center}
-                \end{minipage}
-            \end{flushright}
-        }
+                            \ifnum \@numberofmembers > 3
+                                ~\par
+                                \vspace{4ex}\par
+                                \rule{2.5in}{.01in}\par
+                            \fi
+                            \ifnum \@numberofmembers > 4
+                                ~\par
+                                \vspace{4ex}\par
+                                \rule{2.5in}{.01in}\par
+                            \fi
+                            \ifnum \@numberofmembers > 5
+                                ~\par
+                                \vspace{4ex}\par
+                                \rule{2.5in}{.01in}\par
+                            \fi
+                        \end{center}
+                    \end{minipage}
+                \end{flushright}
+            }
+        \end{Large}
+        \cleardoublepage
     }
-    \cleardoublepage
 }
 %    \end{macrocode}
 % \end{macro}
@@ -595,15 +582,12 @@
 % While it's technically optional, you probably want a copyright page.
 % This is a macro, not an environment, because it can be generated
 % from the degreeyear macro.
-%
 %    \begin{macrocode}
-\newcommand\copyrightpage{
-    \singlespacing
-    \Large
-    \null\vspace{12ex}\par
-    \begin{center}
-        Copyright \@degreeyear \@author\par
-    \end{center}
+\newcommand{\copyrightpage}{
+    \begin{Large}
+        \null\vspace{12ex}\par
+        \begin{center}Copyright {\@degreeyear} {\@author}\par\end{center}
+    \end{Large}
     \cleardoublepage
 }
 %    \end{macrocode}
@@ -617,7 +601,7 @@
 %-- double spaced
 %-- title "ABSTRACT"
 % FIXME: really should be able to check for presence of abs in dissertation
-%
+% FIXME: any way to generate a warning if word count is exceeded?
 %    \begin{macrocode}
 \renewenvironment{abstract}{
     \chapter*{\abstractname}
@@ -631,7 +615,6 @@
 % \begin{environment}{dedication}
 % The dedication environment just makes sure the dedication gets its
 % own page.
-%
 %    \begin{macrocode}
 \newenvironment{dedication}{}{
     \cleardoublepage
@@ -643,7 +626,6 @@
 % The acknowledgments environment puts a large, bold, centered 
 % "Acknowledgments" label at the top of the page.
 %acknowledgement page:
-%-- roman numeral line numbering
 %-- do not show author's name or date
 %-- should show up in toc
 %    \begin{macrocode}
@@ -667,6 +649,14 @@
 \RequirePackage[nottoc]{tocbibind}
 \RequirePackage{tocloft}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+%    \end{macrocode}
+% While the tocloft package affords the ability to customize the table of
+% contents, it does do two annoying things: it changes the commands to generate
+% the table of contents, list of tables, and list of figures so that they no
+% longer automatically generate page breaks and it uses AtBeginDocument to renew
+% the commands, which means that to add the page breaks back in we must also use
+% AtBeginDocument \emph{after} including the tocloft package.
+%    \begin{macrocode}
 \AtBeginDocument{
     \let\origtableofcontents\tableofcontents
     \renewcommand{\tableofcontents}{
@@ -685,6 +675,22 @@
     }
 }
 %    \end{macrocode}
+%
+%list of tables:
+%-- tables numbered using arabic numerals
+%-- titles may be shorter than they appear in the text so long as they are not
+%misleading
+%-- tables may either be numbered consecutively starting with 1, or using chapter
+%number . index
+%-- single space within titles longer than one line, but double space between
+%entries
+%-- requirements are otherwise the same as for the table of contents
+%
+%list of figures/etc:
+%-- figure numbers are done the same as table numbers, plate numbers with capital
+%roman numerals
+%-- if there are both figures and plates arrange them in separate lists
+%-- requirements are otherwise the same as for list of tables
 %
 % \begin{environment}{frontmatter}
 % The FRONTMATTER environment makes sure that page numbering is set
