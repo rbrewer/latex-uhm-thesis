@@ -342,20 +342,18 @@
 %
 %    \begin{macrocode}
 \newcommand{\acknowledgname}{Acknowledgments}
-\ifthenelse{\boolean{\@englishp}}{}{
-    \renewcommand{\contentsname}{Table of Contents}
-    \renewcommand{\listfigurename}{List of Figures}
-    \renewcommand{\listtablename}{List of Tables}
-    \renewcommand{\bibname}{Bibliography}
-    \renewcommand{\indexname}{Index}
-    \renewcommand{\figurename}{Figure}
-    \renewcommand{\tablename}{Table}
-    \renewcommand{\chaptername}{Chapter}
-    \renewcommand{\appendixname}{Appendix}
-    \renewcommand{\partname}{Part}
-    \renewcommand{\abstractname}{Abstract}
-    \renewcommand{\acknowledgname}{Acknowledgments}
-}
+\renewcommand{\contentsname}{Table of Contents}
+\renewcommand{\listfigurename}{List of Figures}
+\renewcommand{\listtablename}{List of Tables}
+\renewcommand{\bibname}{Bibliography}
+\renewcommand{\indexname}{Index}
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+\renewcommand{\chaptername}{Chapter}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\partname}{Part}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\acknowledgname}{Acknowledgments}
 %    \end{macrocode}
 %
 % \begin{macro}{\degreemonth}
@@ -666,8 +664,26 @@
 %-- word headings in toc must match those in the text precisely
 %-- each new sub-level must be indented to distinguish it from the previous level
 %    \begin{macrocode}
-%\RequirePackage[nottoc]{tocbibind}
-%\RequirePackage{tocloft}
+\RequirePackage[nottoc]{tocbibind}
+\RequirePackage{tocloft}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\AtBeginDocument{
+    \let\origtableofcontents\tableofcontents
+    \renewcommand{\tableofcontents}{
+        \origtableofcontents
+        \cleardoublepage
+    }
+    \let\origlistoftables\listoftables
+    \renewcommand{\listoftables}{
+        \origlistoftables
+        \cleardoublepage
+    }
+    \let\origlistoffigures\listoffigures
+    \renewcommand{\listoffigures}{
+        \origlistoffigures
+        \cleardoublepage
+    }
+}
 %    \end{macrocode}
 %
 % \begin{environment}{frontmatter}
