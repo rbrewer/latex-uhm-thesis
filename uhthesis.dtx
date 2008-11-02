@@ -234,6 +234,7 @@
 \DeclareOption{doublespacing}{
     \renewcommand{\@doublespacep}{true}
     \PassOptionsToClass{\CurrentOption}{setspace}
+    \AtEndOfClass{\doublespacing}
 }
 \DeclareOption{draft}{
     \renewcommand{\@draftp}{true}
@@ -268,6 +269,7 @@
 \DeclareOption{singlespacing}{
     \renewcommand{\@doublespacep}{false}
     \PassOptionsToClass{\CurrentOption}{setspace}
+    \AtEndOfClass{\singlespacing}
 }
 \DeclareOption{thesis}{\renewcommand{\@thesisp}{true}}
 \DeclareOption{twocolumn}{
