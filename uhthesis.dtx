@@ -112,8 +112,38 @@
 %   \item index (optional)
 % \end{itemize}
 %
-%-- may be organized into either sections or chapters
-%-- if organized in chapters, each chapter must be titled and begin on a new page
+% There are a number of formatting requirements listed in the style guide which
+% are already addressed by \LaTeX either directly or through the report document
+% class upon which this class is based. Care should be taken to insure that
+% formatting changes in this class do not violate the following requirements:
+% \begin{itemize}
+%   \item headings and subheadings must be consistent
+%   \item every page should be counted in the numbering
+%   \item no text or marks around page numbers, no slash through zeros in page 
+%         numbers
+% \end{itemize}
+%
+% Some of the requirements in the style guide cannot be properly addressed
+% within the uhthesis document class. Authors should take care to ensure that
+% the following requirements are met by their document:
+% \begin{itemize}
+%   \item must be organized into either sections or chapters
+%   \item if organized in chapters, each chapter must be titled and begin on a
+          new page
+%   \item appendices may include schedules, lists, questionnaires, test, forms,
+%         case studies, series of plates and figures, etc.
+%   \item each type of material forms a separate appendix which must be labelled
+%         separately
+%   \item the bibliography should be a style that is professionally acceptable 
+%         within the field
+%   \item nothing not use in the preparation of the thesis/dissertation should
+%         be included in the bibliography
+%   \item be consistent in the use of foreign words, italics or underlining is
+%         recommended. A quotation entirely in a foreign language should only
+%         appear in quotation marks and not be italicized or underlined.
+%   \item commas and periods should be placed within quotation marks
+% \end{itemize}
+%
 %-- chapter titles should be centered and consistently use the same size and
 %style of font
 %-- if dissertation is divided into "Parts" then each new part designation should
@@ -121,23 +151,15 @@
 %each part.
 %
 %appendices:
-%-- may include schedules, lists, questionnaires, test, forms, case studies,
-%series of plates and figures, etc.
 %-- no cover pages, just center the title of the appendix on the first page
-%-- each type of material forms a separate appendix which must be labelled
-%separately
 %-- if there is only one appendix it must be titled "Appendix", not "Appendix A"
 %
 %bibliography:
-%-- should be a style that is professionally acceptable within the field
 %-- the heading "Literature Cited" may be used if it only contains references
 %actually cited
-%-- nothing not use in the preparation of the thesis/dissertation should be
-%included
 %
 %other formatting reqs:
 %-- page numbers either at top right or centered 1 inch from bottom
-%-- headings and subheadings must be consistent
 %-- major headings (acknowledgements, abstract, toc, list of tables, list of
 %figures, preface, chapter headings, appendices, and biography) should appear
 %centered at the top of a new page immediately followed by the text. chapter
@@ -150,19 +172,13 @@
 %-- page numbers fall within margins
 %-- whitespace between words must be approximately even, and so full
 %justification is not recommended.
-%-- be consistent in the use of foreign words, italics or underlining is
-%recommended.  A quotation entirely in a foreign language should only appear in
-%quotation marks and not be italicized or underlined.
 %-- use of hawaiian words should be consistent
 %-- double spacing except where required otherwise
 %-- no widows or orphans
-%-- commas and periods should be placed within quotation marks
 %-- i.e. and e.g. should be followed by commas
 %-- no more than 3 hyphenations at the end of a line per page
 %-- no more than two consecutive lines with hyphens at the end.
 %-- every page should be numbered except the title and cover pages for parts
-%-- every page should be counted in the numbering
-%-- no text or marks around page numbers, no slash through zeros in page numbers
 %-- chapters may be designated either
 %    CHAPTER N       or CHAPTER N. BLAH BLAH
 %   BLAH BLAH
@@ -552,6 +568,7 @@
 \newcommand\signaturepage{
     \ifthenelse{\boolean{\@proposalp}\or\boolean{\@draftp}}{}{
         \begin{Large}
+        \begin{singlespacing}
             \null\vspace{4ex}\par
             \noindent We certify that we have read this
             \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} and that, in
@@ -562,37 +579,38 @@
             \vspace{8ex}\par
             \parbox[l]{5in}{
                 \begin{flushright}
-                    \begin{minipage}{2.7in}
-                        \begin{center}
-                            \MakeUppercase{\@papertype} COMMITTEE\par
-                            ~\par
-                            \vspace{4ex}\par
-                            \rule{2.5in}{.01in}\par
-                            Chairperson\par
-                            \vspace{4ex}\par
-                            \rule{2.5in}{.01in}\par
-                            ~\par
-                            \vspace{4ex}\par
-                            \rule{2.5in}{.01in}\par
-                            \ifnum \@numberofmembers > 3
-                                ~\par
-                                \vspace{4ex}\par
-                                \rule{2.5in}{.01in}\par
-                            \fi
-                            \ifnum \@numberofmembers > 4
-                                ~\par
-                                \vspace{4ex}\par
-                                \rule{2.5in}{.01in}\par
-                            \fi
-                            \ifnum \@numberofmembers > 5
-                                ~\par
-                                \vspace{4ex}\par
-                                \rule{2.5in}{.01in}\par
-                            \fi
-                        \end{center}
-                    \end{minipage}
+                \begin{minipage}{2.7in}
+                \begin{center}
+                    \MakeUppercase{\@papertype} COMMITTEE\par
+                    ~\par
+                    \vspace{4ex}\par
+                    \rule{2.5in}{.01in}\par
+                    Chairperson\par
+                    \vspace{4ex}\par
+                    \rule{2.5in}{.01in}\par
+                    ~\par
+                    \vspace{4ex}\par
+                    \rule{2.5in}{.01in}\par
+                    \ifnum \@numberofmembers > 3
+                        ~\par
+                        \vspace{4ex}\par
+                        \rule{2.5in}{.01in}\par
+                    \fi
+                    \ifnum \@numberofmembers > 4
+                        ~\par
+                        \vspace{4ex}\par
+                        \rule{2.5in}{.01in}\par
+                    \fi
+                    \ifnum \@numberofmembers > 5
+                        ~\par
+                        \vspace{4ex}\par
+                        \rule{2.5in}{.01in}\par
+                    \fi
+                \end{center}
+                \end{minipage}
                 \end{flushright}
             }
+        \end{singlespacing}
         \end{Large}
         \cleardoublepage
     }
