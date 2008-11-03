@@ -83,34 +83,35 @@
 % page~\cite{uhthesisstyle2002}. It is your responsibility to determine whether
 % this style meets your needs.
 %
-%the following pages must appear in the following order and have lower case roman
-%numeral page numbers, only the title page is unnumbered:
-%-- title page (no number)
-%-- signature page
-%-- copyright page  (optional)
-%-- dedication page (optional)
-%-- acknowledgements (optional)
-%-- abstract
-%-- table of contents
-%-- list of tables
-%-- list of figures/illustrations/graphs/charts/maps/plates
-%-- list of abbreviations and symbols (optional)
-%-- preface (optional)
+% The following pages must appear in the following order and have lower case Roman
+% numeral page numbers, only the title page is
+% unnumbered~\cite[p. 3]{uhthesisstyle2002}:
+% \begin{itemize}
+%   \item title page
+%   \item signature page
+%   \item copyright page  (optional)
+%   \item dedication page (optional)
+%   \item acknowledgements (optional)
+%   \item abstract
+%   \item table of contents
+%   \item list of tables (if any)
+%   \item list of figures/illustrations/graphs/charts/maps/plates (if any)
+%   \item list of abbreviations and symbols (optional)
+%   \item preface (optional)
+% \end{itemize}
 %
-%text and other pages following preliminary pages are numbered using Arabic
-%numerals and must appear in the following order
-%-- text
-%-- appendices (if any)
-%-- notes (if any)
-%-- glossary (optional)
-%-- bibliography
-%-- index (optional)
+% Text and other pages following preliminary pages are numbered using Arabic
+% numerals and must appear in the following
+% order~\cite[p. 3]{uhthesisstyle2002}:
+% \begin{itemize}
+%   \item text
+%   \item appendices (if any)
+%   \item notes (if any)
+%   \item glossary (optional)
+%   \item bibliography
+%   \item index (optional)
+% \end{itemize}
 %
-%list of abbreviations and/or symbols:
-%
-%preface:
-%
-%text:
 %-- may be organized into either sections or chapters
 %-- if organized in chapters, each chapter must be titled and begin on a new page
 %-- chapter titles should be centered and consistently use the same size and
@@ -309,7 +310,7 @@
 %    \end{macrocode}
 %
 % Margins are one-inch except on the binding side. On the binding side 1.5" is
-% required.
+% required~\cite[p. 8]{uhthesisstyle2002}.
 %
 %    \begin{macrocode}
 \RequirePackage[left=1.5in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
@@ -334,6 +335,7 @@
 %
 %    \begin{macrocode}
 \newcommand{\acknowledgname}{Acknowledgments}
+\newcommand{\prefacename}{Preface}
 \renewcommand{\contentsname}{Table of Contents}
 \renewcommand{\listfigurename}{List of Figures}
 \renewcommand{\listtablename}{List of Tables}
@@ -426,24 +428,42 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{environment}{frontmatter}
+% The FRONTMATTER environment makes sure that page numbering is set
+% correctly (roman, lower-case, starting at 2) for the front matter.
+% It also resets page-numbering for
+% the remainder of the dissertation (arabic, starting at 1).
+%
+%    \begin{macrocode}
+\newenvironment{frontmatter}{
+    \pagenumbering{roman}
+    \setcounter{page}{2}
+}{
+    \pagenumbering{arabic}
+    \setcounter{page}{1}
+}
+%    \end{macrocode}
+% \end{environment}
+%
 % \begin{macro}{\maketitle}
-%title page:
-%-- there must be an okina before the final "i" in Hawai`i
-%-- name
-%-- degree
-%-- field
-%-- graduation month \& year
-%-- committee members names, outside member's is usually last
-%-- do not include titles such as Dr., but the committee chair should be
-%designated "chairperson"
-%-- specialty, if any, in parenthesis after field
+% This macro outputs the complete title page. It requires all the above macros.
+% Based on the options provided, it will customize the title page: thesis vs.
+% dissertation, proposal vs. actual.
 %
-% Outputs the complete title page. It requires all the above macros. Based on
-% the options provided, it will customize the title page: thesis vs.
-% dissertation, proposal vs. actual
+% The following items must be included on the title
+% page~\cite[p. 3]{uhthesisstyle2002}:
+% \begin{itemize}
+%   \item there must be an `okina before the final "i" in Hawai`i
+%   \item name of the author
+%   \item degree being awarded
+%   \item field of study
+%   \item area of specialty, if any, in parenthesis after field
+%   \item the author's graduation month \& year
+%   \item committee members names, outside member's is usually last
+% \begin{itemize}
+% There is an additional requirement to not include titles such as Dr., but the
+% committee chair should bedesignated "chairperson".
 %
-% Set the font that will be used in the front matter headings
-% FIXME: subfield should display in parenthesis after field if specified
 %    \begin{macrocode}
 \newcommand{\@papertype}{}
 \ifthenelse{\boolean{\@thesisp}}{
@@ -624,7 +644,7 @@
 %    \end{macrocode}
 % \end{environment}
 %
-% \begin{environment}{acknowldedgments}
+% \begin{environment}{acknowledgments}
 % The acknowledgments environment puts a large, bold, centered 
 % "Acknowledgments" label at the top of the page.
 %acknowledgement page:
@@ -634,6 +654,18 @@
 \newenvironment{acknowledgments}{
     \chapter*{\acknowledgname}
     \addcontentsline{toc}{chapter}{\acknowledgname}
+}{
+    \cleardoublepage
+}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{environment}{preface}
+% The preface environment just makes sure the preface gets its own page.
+%    \begin{macrocode}
+\newenvironment{preface}{
+    \chapter*{\prefacename}
+    \addcontentsline{toc}{chapter}{\prefacename}
 }{
     \cleardoublepage
 }
@@ -693,23 +725,6 @@
 %roman numerals
 %-- if there are both figures and plates arrange them in separate lists
 %-- requirements are otherwise the same as for list of tables
-%
-% \begin{environment}{frontmatter}
-% The FRONTMATTER environment makes sure that page numbering is set
-% correctly (roman, lower-case, starting at 2) for the front matter.
-% It also resets page-numbering for
-% the remainder of the dissertation (arabic, starting at 1).
-%
-%    \begin{macrocode}
-\newenvironment{frontmatter}{
-    \pagenumbering{roman}
-    \setcounter{page}{2}
-}{
-    \pagenumbering{arabic}
-    \setcounter{page}{1}
-}
-%    \end{macrocode}
-% \end{environment}
 %
 % \bibliographystyle{plain}
 % \bibliography{uhthesis}
