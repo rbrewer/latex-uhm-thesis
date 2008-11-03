@@ -144,8 +144,6 @@
 %   \item commas and periods should be placed within quotation marks
 % \end{itemize}
 %
-%-- chapter titles should be centered and consistently use the same size and
-%style of font
 %-- if dissertation is divided into "Parts" then each new part designation should
 %appear on a separate cover page. numbering for chapters does not begin anew for
 %each part.
@@ -366,6 +364,36 @@
 \renewcommand{\acknowledgname}{Acknowledgments}
 %    \end{macrocode}
 %
+% The style guide has the following requirements for chapter headings:
+% \begin{itemize}
+% \item chapter titles should be centered and consistently use the same size
+%       and style of font
+% \end{itempize}
+\renewcommand{\@makechapterhead}[1]{
+    \begin{Large}
+    \begin{bf}
+    \begin{singlespacing}
+    \begin{center}
+        \MakeUppercase{\@chapapp}~\thechapter\par
+        \MakeUppercase{#1}\par
+        ~\par
+    \end{center}
+    \end{singlespacing}
+    \end{bf}
+    \end{Large}
+}
+\renewcommand{\@makeschapterhead}[1]{
+    \begin{Large}
+    \begin{bf}
+    \begin{singlespacing}
+    \begin{center}
+        \MakeUppercase{#1}\par
+        ~\par
+    \end{center}
+    \end{singlespacing}
+    \end{bf}
+    \end{Large}
+}
 % \begin{macro}{\degreemonth}
 % The month the degree will be officially conferred, capitalized normally. The
 % default month is May since most students graduate at the end of the Spring
@@ -712,7 +740,9 @@
 \AtBeginDocument{
     \let\origtableofcontents\tableofcontents
     \renewcommand{\tableofcontents}{
-        \origtableofcontents
+        \begin{singlespacing}
+            \origtableofcontents
+        \end{singlespacing}
         \cleardoublepage
     }
     \let\origlistoftables\listoftables
