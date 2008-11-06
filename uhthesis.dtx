@@ -246,8 +246,7 @@
 \DeclareOption{dissertation}{\renewcommand{\@thesisp}{false}}
 \DeclareOption{doublespacing}{
     \renewcommand{\@doublespacep}{true}
-    \PassOptionsToClass{\CurrentOption}{setspace}
-    \AtEndOfClass{\doublespacing}
+    \PassOptionsToPackage{\CurrentOption}{setspace}
 }
 \DeclareOption{draft}{
     \renewcommand{\@draftp}{true}
@@ -281,8 +280,7 @@
 \DeclareOption{proposal}{\renewcommand{\@proposalp}{true}}
 \DeclareOption{singlespacing}{
     \renewcommand{\@doublespacep}{false}
-    \PassOptionsToClass{\CurrentOption}{setspace}
-    \AtEndOfClass{\singlespacing}
+    \PassOptionsToPackage{\CurrentOption}{setspace}
 }
 \DeclareOption{thesis}{\renewcommand{\@thesisp}{true}}
 \DeclareOption{twocolumn}{
