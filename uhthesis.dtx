@@ -121,6 +121,7 @@
 %   \item every page should be counted in the numbering
 %   \item no text or marks around page numbers, no slash through zeros in page 
 %         numbers
+%   \item 10 point or larger font
 % \end{itemize}
 %
 % Some of the requirements in the style guide cannot be properly addressed
@@ -142,6 +143,7 @@
 %         recommended. A quotation entirely in a foreign language should only
 %         appear in quotation marks and not be italicized or underlined.
 %   \item commas and periods should be placed within quotation marks
+%   \item i.e. and e.g. should be followed by commas
 % \end{itemize}
 %
 %-- if dissertation is divided into "Parts" then each new part designation should
@@ -164,24 +166,17 @@
 %style, headings at the same sublevel must use the same style consistently
 %throughout the work, subheadings should not begin on a new page unless the
 %previous section ended at the bottom of a page.
-%-- 1", except inside margin 1.5" to make manuscript suitable for binding.
 %-- page numbers fall within margins
 %-- whitespace between words must be approximately even, and so full
 %justification is not recommended.
 %-- use of hawaiian words should be consistent
 %-- double spacing except where required otherwise
 %-- no widows or orphans
-%-- i.e. and e.g. should be followed by commas
 %-- no more than 3 hyphenations at the end of a line per page
 %-- no more than two consecutive lines with hyphens at the end.
 %-- every page should be numbered except the title and cover pages for parts
-%-- chapters may be designated either
-%    CHAPTER N       or CHAPTER N. BLAH BLAH
-%   BLAH BLAH
-%-- 10 point or larger font
 %-- print on one side of page only
 %-- 8.5x11 in
-%
 %
 %tables:
 %-- "Table" then a number, then a period, followed by caption and then contents
@@ -223,27 +218,15 @@
 % will be printed if it is specified.
 % 
 %    \begin{macrocode}
-\newcommand{\@doublespacep}{}
-\newcommand{\@draftp}{}
-\newcommand{\@englishp}{}
-\newcommand{\@letterpaperp}{}
-\newcommand{\@proposalp}{}
-\newcommand{\@thesisp}{}
-\newcommand{\@twosidep}{}
-\DeclareOption{a4paper}{
-    \renewcommand{\@letterpaperp}{false}
-    \PassOptionsToClass{\CurrentOption}{report}
-}
-\DeclareOption{a5paper}{
-    \renewcommand{\@letterpaperp}{false}
-    \PassOptionsToClass{\CurrentOption}{report}
-}
-\DeclareOption{b5paper}{
-    \renewcommand{\@letterpaperp}{false}
-    \PassOptionsToClass{\CurrentOption}{report}
-}
-\DeclareOption{actual}{\renewcommand{\@proposalp}{false}}
-\DeclareOption{dissertation}{\renewcommand{\@thesisp}{false}}
+\newcommand{\@doublespacep}{false}
+\newcommand{\@draftp}{false}
+\newcommand{\@englishp}{false}
+\newcommand{\@letterpaperp}{false}
+\newcommand{\@proposalp}{false}
+\newcommand{\@thesisp}{false}
+\newcommand{\@twosidep}{false}
+\DeclareOption{actual}{\null}
+\DeclareOption{dissertation}{\null}
 \DeclareOption{doublespacing}{
     \renewcommand{\@doublespacep}{true}
     \PassOptionsToPackage{\CurrentOption}{setspace}
@@ -253,35 +236,15 @@
     \PassOptionsToClass{\CurrentOption}{report}
 }
 \DeclareOption{english}{\renewcommand{\@englishp}{true}}
-\DeclareOption{executivepaper}{
-    \renewcommand{\@letterpaperp}{false}
-    \PassOptionsToClass{\CurrentOption}{report}
-}
-\DeclareOption{final}{
-    \renewcommand{\@draftp}{false}
-    \PassOptionsToClass{\CurrentOption}{report}
-}
 \DeclareOption{hawaiian}{
-    \renewcommand{\@englishp}{false}
     \ClassErrorNoLine{uhthesis}
         {The ``hawaiian'' option is not supported at this time}}
 \DeclareOption{letterpaper}{
     \renewcommand{\@letterpaperp}{true}
     \PassOptionsToClass{\CurrentOption}{report}
 }
-\DeclareOption{legalpaper}{
-    \renewcommand{\@letterpaperp}{false}
-    \PassOptionsToClass{\CurrentOption}{report}
-}
-\DeclareOption{oneside}{
-    \renewcommand{\@twosidep}{false}
-    \PassOptionsToClass{\CurrentOption}{report}
-}
 \DeclareOption{proposal}{\renewcommand{\@proposalp}{true}}
-\DeclareOption{singlespacing}{
-    \renewcommand{\@doublespacep}{false}
-    \PassOptionsToPackage{\CurrentOption}{setspace}
-}
+\DeclareOption{singlespacing}{\PassOptionsToPackage{\CurrentOption}{setspace}}
 \DeclareOption{thesis}{\renewcommand{\@thesisp}{true}}
 \DeclareOption{twocolumn}{
     \OptionNotUsed
@@ -300,7 +263,8 @@
 %
 % The class will emit warnings if the selected options are not compatible with
 % the requirements of the graduate division. twoside, single spacing and paper
-% formats other than letter are only allowed in draft mode.
+% formats other than letter are only allowed in draft
+% mode~\cite{uhthesisstyle2002}.
 %
 %    \begin{macrocode}
 \RequirePackage{ifthen}
@@ -332,7 +296,7 @@
 \RequirePackage{setspace}
 %    \end{macrocode}
 %
-% This document style was create for documents prepared in the English language.
+% This document style was created for documents prepared in the English language.
 % The graduate division specifies that dissertations may be in either English or
 % Hawaiian, so we allow for the replacement of English lables and headings. If
 % anyone is interested in making this style compatible with the Hawaiian
@@ -456,7 +420,7 @@
 % \end{macro}
 %
 % \begin{macro}{\field}
-% The name of your degree's field (e.g. Psychology, Computer Science),
+% The name of your degree's field (e.g., Psychology, Computer Science),
 % capitalized normally.
 %    \begin{macrocode}
 \newcommand{\@field}{}
@@ -465,7 +429,7 @@
 % \end{macro}
 %
 % \begin{macro}{\subfield}
-% The name of your degree's field (e.g. Psychology, Computer Science),
+% The name of your degree's subfield (e.g., Computer Science (Bioinformatics)),
 % capitalized normally.
 %    \begin{macrocode}
 \newcommand{\@subfield}{}
@@ -478,6 +442,8 @@
 % correctly (roman, lower-case, starting at 2) for the front matter.
 % It also resets page-numbering for
 % the remainder of the dissertation (arabic, starting at 1).
+% FIXME: the book class provides this functionality, perhaps we should use book
+% instead of report?
 %
 %    \begin{macrocode}
 \newenvironment{frontmatter}{
@@ -498,12 +464,12 @@
 % The following items must be included on the title
 % page~\cite[p. 3]{uhthesisstyle2002}:
 % \begin{itemize}
-%   \item there must be an `okina before the final "i" in Hawai`i
+%   \item an `okina before the final "i" in Hawai`i
 %   \item name of the author
 %   \item degree being awarded
 %   \item field of study
 %   \item area of specialty, if any, in parenthesis after field
-%   \item the author's graduation month \& year
+%   \item the author's graduation month and year
 %   \item committee members names, outside member's is usually last
 % \begin{itemize}
 % There is an additional requirement to not include titles such as Dr., but the
@@ -584,14 +550,16 @@
 % sig lines
 %
 %signature page:
-%-- no title or heading
-%-- page number (ii) should appear consistent w/ rest of manuscript
-%-- name
-%-- degree
-%-- field
-%-- specialty, if any, in parenthesis after field
-%-- exactly as many blank lines for signatures as committee members
-%-- right margin 2 inches to prevent signing into the margin (suggested)
+% \begin{itemize}
+%   \item no title or heading
+%   \item page number (ii) should appear consistent w/ rest of manuscript
+%   \item include author's name
+%   \item include author's degree
+%   \item include author's field
+%   \item include author's specialty, if any, in parenthesis after field
+%   \item exactly as many blank lines for signatures as committee members
+%   \item right margin 2 inches to prevent signing into the margin (suggested)
+% \end{itemize}
 %
 %    \begin{macrocode}
 \newcommand\signaturepage{
@@ -720,12 +688,15 @@
 % \end{environment}
 %
 %table of contents:
-%-- includes acknowledgements, abstract, list of tables, list of figures, list of
-%abbreviations and/or symbols, appendices, bibliography, and major sections of
-%the text, do not list title page, signature page, or dedication
-%-- must have dot leaders between end of heading and page number
-%-- word headings in toc must match those in the text precisely
-%-- each new sub-level must be indented to distinguish it from the previous level
+% \begin{itemize}
+%   \item includes acknowledgements, abstract, list of tables, list of figures, list of
+%         abbreviations and/or symbols, appendices, bibliography, and major sections of
+%         the text, do not list title page, signature page, or dedication
+%   \item must have dot leaders between end of heading and page number
+%   \item word headings in toc must match those in the text precisely
+%   \item each new sub-level must be indented to distinguish it from the previous level
+% \end{itemize}
+%
 %    \begin{macrocode}
 \RequirePackage[nottoc]{tocbibind}
 \RequirePackage[titles]{tocloft}
@@ -748,12 +719,16 @@
     }
     \let\origlistoftables\listoftables
     \renewcommand{\listoftables}{
-        \origlistoftables
+        \begin{singlespacing}
+            \origlistoftables
+        \end{singlespacing}
         \cleardoublepage
     }
     \let\origlistoffigures\listoffigures
     \renewcommand{\listoffigures}{
-        \origlistoffigures
+        \begin{singlespacing}
+            \origlistoffigures
+        \end{singlespacing}
         \cleardoublepage
     }
 }
