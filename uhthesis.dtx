@@ -273,12 +273,12 @@
         \ClassWarningNoLine{uhthesis}{final drafts should be double spaced}
     }
     \ifthenelse{\boolean{\@letterpaperp}}{}{
-        \ClassWarningNoLine{uhthesis}{final drafts should be printed on letter
-            paper}
+        \ClassWarningNoLine{uhthesis}
+            {final drafts should be printed on letter paper}
     }
     \ifthenelse{\boolean{\@twosidep}}{
-        \ClassWarningNoLine{uhthesis}{final drafts should be printed on only
-            one side}
+        \ClassWarningNoLine{uhthesis}
+            {final drafts should be printed on only one side}
     }{}
 }
 %    \end{macrocode}
@@ -305,7 +305,7 @@
 % Other English words that need replacement can be found in the macros
 % supporting the title and signature pages.
 %
-% FIXME:In the future we should probably use the babel package here.
+% FIXME: In the future we should probably use the babel package here.
 %
 %    \begin{macrocode}
 \newcommand{\acknowledgname}{Acknowledgments}
@@ -334,7 +334,7 @@
 %         "Appendix A"
 % \end{itemize}
 % FIXME: address "Appendix A" issue
-% \iffalse
+%    \begin{macrocode}
 \renewcommand{\@makechapterhead}[1]{
     \begin{Large}
     \begin{bf}
@@ -360,7 +360,7 @@
     \end{bf}
     \end{Large}
 }
-% \fi
+%    \end{macrocode}
 % \begin{macro}{\degreemonth}
 % The month the degree will be officially conferred, capitalized normally. The
 % default month is May since most students graduate at the end of the Spring
