@@ -334,6 +334,7 @@
 %         "Appendix A"
 % \end{itemize}
 % FIXME: address "Appendix A" issue
+% \iffalse
 \renewcommand{\@makechapterhead}[1]{
     \begin{Large}
     \begin{bf}
@@ -359,6 +360,7 @@
     \end{bf}
     \end{Large}
 }
+% \fi
 % \begin{macro}{\degreemonth}
 % The month the degree will be officially conferred, capitalized normally. The
 % default month is May since most students graduate at the end of the Spring
@@ -471,11 +473,11 @@
 %   \item area of specialty, if any, in parenthesis after field
 %   \item the author's graduation month and year
 %   \item committee members names, outside member's is usually last
-% \begin{itemize}
+% \end{itemize}
 % There is an additional requirement to not include titles such as Dr., but the
 % committee chair should bedesignated "chairperson".
 %
-%    \begin{macrocode}
+% \begin{macrocode}
 \newcommand{\@papertype}{}
 \ifthenelse{\boolean{\@thesisp}}{
     \renewcommand{\@papertype}{Thesis}
