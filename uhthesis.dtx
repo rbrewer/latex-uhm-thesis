@@ -166,7 +166,6 @@
 %style, headings at the same sublevel must use the same style consistently
 %throughout the work, subheadings should not begin on a new page unless the
 %previous section ended at the bottom of a page.
-%-- page numbers fall within margins
 %-- whitespace between words must be approximately even, and so full
 %justification is not recommended.
 %-- use of hawaiian words should be consistent
@@ -262,7 +261,7 @@
 %    \end{macrocode}
 %
 % The class will emit warnings if the selected options are not compatible with
-% the requirements of the graduate division. twoside, single spacing and paper
+% the requirements of the Graduate Division. twoside, single spacing and paper
 % formats other than letter are only allowed in draft
 % mode~\cite{uhthesisstyle2002}.
 %
@@ -283,11 +282,18 @@
 }
 %    \end{macrocode}
 %
-% Margins are one-inch except on the binding side. On the binding side 1.5" is
-% required~\cite[p. 8]{uhthesisstyle2002}.
+% Margins are one-inch except on the binding side. The margin on the binding
+% side is required to be 1.5 inches to ensure that no portion of the thesis is
+% cut off during binding~\cite[p. 8]{uhthesisstyle2002}. We use the
+% \emph{includefoot} option to ensure that the page numbers fall within the
+% margins of the page, as required~\cite[p. 8]{uhthesisstyle2002}.
+%
+% FIXME: maybe we should pass the twoside option to geometry when set by the
+% user.
 %
 %    \begin{macrocode}
-\RequirePackage[left=1.5in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+\RequirePackage[left=1.5in, right=1.0in, top=1.0in, bottom=1.0in,
+    includefoot]{geometry}
 %    \end{macrocode}
 %
 % The setspace package is used to control line spacing.
@@ -297,7 +303,7 @@
 %    \end{macrocode}
 %
 % This document style was created for documents prepared in the English language.
-% The graduate division specifies that dissertations may be in either English or
+% The Graduate Division specifies that dissertations may be in either English or
 % Hawaiian, so we allow for the replacement of English lables and headings. If
 % anyone is interested in making this style compatible with the Hawaiian
 % language, please contact the authors.
@@ -523,7 +529,7 @@
         By\par
         \vspace{2ex}\par
         \@author\par
-        \vspace{8ex}\par
+        \vspace{6ex}\par
         \@papertype~Committee:\par
         \vspace{2ex}\par
         \@chair, Chairperson\par
