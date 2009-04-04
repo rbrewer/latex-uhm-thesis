@@ -245,6 +245,7 @@
 \DeclareOption{proposal}{\renewcommand{\@proposalp}{true}}
 \DeclareOption{singlespacing}{\PassOptionsToPackage{\CurrentOption}{setspace}}
 \DeclareOption{thesis}{\renewcommand{\@thesisp}{true}}
+\DeclareOption{dissertation}{\renewcommand{\@thesisp}{false}}
 \DeclareOption{twocolumn}{
     \OptionNotUsed
     \ClassWarningNoLine{uhthesis}{This class does not support the two column format}
@@ -507,25 +508,26 @@
                 OF THE REQUIREMENTS FOR THE DEGREE OF\par
             }
         }{
-            A \MakeUppercase{\@papertype} SUBMITTED TO THE GRADUATE DIVISION OF THE\par
-            UNIVERSITY OF HAWAI`I IN PARTIAL FULFILLMENT\par
-            OF THE REQUIREMENTS FOR THE DEGREE OF\par
+            A \MakeUppercase{\@papertype} SUBMITTED TO THE GRADUATE DIVISION\par
+            OF THE UNIVERSITY OF HAWAI`I\par
+            IN PARTIAL FULFILLMENT OF THE REQUIREMENTS\par
+            FOR THE DEGREE OF\par
         }
-        \vspace{4ex}\par
+        \vspace{3ex}\par
         \MakeUppercase{\@degree}\par
-        \vspace{4ex}\par
+        \vspace{3ex}\par
         IN\par
-        \vspace{4ex}\par
+        \vspace{3ex}\par
         \MakeUppercase{\@field}
         \ifthenelse{\equal{\@subfield}{}}{}{(\MakeUppercase{\@subfield})}\par
-        \vspace{4ex}\par
+        \vspace{3ex}\par
         \ifthenelse{\boolean{\@proposalp}}{
-            \vspace{4ex}\par
+            \par
         }{
-            \vspace{2ex}\par
+            \vspace{1ex}\par
             \MakeUppercase{\@degreemonth~\@degreeyear}\par
         }
-        \vspace{8ex}\par
+        \vspace{4ex}\par
         By\par
         \vspace{2ex}\par
         \@author\par
@@ -535,7 +537,7 @@
         \@chair, Chairperson\par
         \@othermembers\par
         \ifthenelse{\boolean{\@proposalp}\or\boolean{\@draftp}}{
-            \vspace{8ex}\par
+            \vspace{4ex}\par
             \today\par
             Version \@versionnum
         }{}
