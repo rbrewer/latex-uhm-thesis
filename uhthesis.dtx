@@ -482,7 +482,7 @@
 %   \item committee members names, outside member's is usually last
 % \end{itemize}
 % There is an additional requirement to not include titles such as Dr., but the
-% committee chair should bedesignated "chairperson".
+% committee chair should be designated "chairperson".
 %
 % \begin{macrocode}
 \newcommand{\@papertype}{}
@@ -643,10 +643,12 @@
 % \begin{environment}{abstract}
 % The ABSTRACT environment allows for multi-page abstracts.
 %abstract page:
-%-- not required for thesis, required for dissertation
-%-- thesis abstract no more than 150 wds, dissertation no more than 350
-%-- double spaced
-%-- title "ABSTRACT"
+% \begin{itemize}
+%   \item not required for thesis, required for dissertation
+%   \item title "ABSTRACT"
+%   \item thesis abstract no more than 150 wds, dissertation no more than 350
+%   \item double spaced
+% \end{itemize}
 % FIXME: really should be able to check for presence of abs in dissertation
 % FIXME: any way to generate a warning if word count is exceeded?
 %    \begin{macrocode}
@@ -701,7 +703,7 @@
 % \begin{itemize}
 %   \item includes acknowledgements, abstract, list of tables, list of figures, list of
 %         abbreviations and/or symbols, appendices, bibliography, and major sections of
-%         the text, do not list title page, signature page, or dedication
+%         the text, does not list title page, signature page, or dedication
 %   \item must have dot leaders between end of heading and page number
 %   \item word headings in toc must match those in the text precisely
 %   \item each new sub-level must be indented to distinguish it from the previous level
