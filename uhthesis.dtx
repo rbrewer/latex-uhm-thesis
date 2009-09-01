@@ -77,9 +77,9 @@
 % the requirements for University of Hawai`i Masters theses and Ph.D.
 % dissertations.
 %                        
-% This document class was based on the ``Style and Policy Manual For Theses and
+% This document class is based on the ``Style and Policy Manual For Theses and
 % Dissertations'' provided by the University of Hawai`i Graduate Division. The
-% version used says ``Revised April 2002'' inside the title
+% version used states ``Revised April 2002'' inside the title
 % page~\cite{uhthesisstyle2002}. It is your responsibility to determine whether
 % this style meets your needs.
 %
@@ -115,7 +115,7 @@
 % There are a number of formatting requirements listed in the style guide which
 % are already addressed by \LaTeX either directly or through the report document
 % class upon which this class is based. Care should be taken to insure that
-% formatting changes in this class do not violate the following requirements:
+% formatting changes made by authors do not violate the following requirements:
 % \begin{itemize}
 %   \item headings and subheadings must be consistent
 %   \item every page should be counted in the numbering
@@ -137,24 +137,18 @@
 %         separately
 %   \item the bibliography should be a style that is professionally acceptable 
 %         within the field
-%   \item nothing not use in the preparation of the thesis/dissertation should
+%   \item only references used in the preparation of the thesis/dissertation should
 %         be included in the bibliography
-%   \item be consistent in the use of foreign words, italics or underlining is
+%   \item consistent use and formatting of foreign words; italics or underlining is
 %         recommended. A quotation entirely in a foreign language should only
 %         appear in quotation marks and not be italicized or underlined.
 %   \item commas and periods should be placed within quotation marks
 %   \item i.e. and e.g. should be followed by commas
 % \end{itemize}
 %
-%-- if dissertation is divided into "Parts" then each new part designation should
-%appear on a separate cover page. numbering for chapters does not begin anew for
-%each part.
 %
 %appendices:
 %
-%bibliography:
-%-- the heading "Literature Cited" may be used if it only contains references
-%actually cited
 %
 %other formatting reqs:
 %-- page numbers either at top right or centered 1 inch from bottom
@@ -320,6 +314,9 @@
 \renewcommand{\contentsname}{Table of Contents}
 \renewcommand{\listfigurename}{List of Figures}
 \renewcommand{\listtablename}{List of Tables}
+%bibliography:
+%-- the heading "Literature Cited" may be used if it only contains references
+%actually cited
 \renewcommand{\bibname}{Bibliography}
 \renewcommand{\indexname}{Index}
 \renewcommand{\figurename}{Figure}
@@ -330,6 +327,10 @@
 \renewcommand{\abstractname}{Abstract}
 \renewcommand{\acknowledgname}{Acknowledgments}
 %    \end{macrocode}
+%
+%-- if dissertation is divided into "Parts" then each new part designation should
+%appear on a separate cover page. numbering for chapters does not begin anew for
+%each part.
 %
 % The style guide has the following requirements for chapter headings:
 % \begin{itemize}
@@ -500,21 +501,13 @@
         \MakeUppercase{\@title}\par
         \vspace{4ex}\par
         \ifthenelse{\boolean{\@proposalp}}{
-            \ifthenelse{\boolean{\@thesisp}}{
-                A THESIS PROPOSAL SUBMITTED TO MY THESIS COMMITTEE\par
-            }{
-                A DISSERTATION PROPOSAL SUBMITTED\par
-                TO THE GRADUATE DIVISION OF THE\par
-                UNIVERSITY OF HAWAI`I\par
-                IN PARTIAL FULFILLMENT OF THE\par
-                REQUIREMENTS FOR THE DEGREE OF\par
-            }
+            A \MakeUppercase{\@papertype} PROPOSAL SUBMITTED TO MY COMMITTEE\par
         }{
             A \MakeUppercase{\@papertype} SUBMITTED TO THE GRADUATE DIVISION\par
             OF THE UNIVERSITY OF HAWAI`I\par
-            IN PARTIAL FULFILLMENT OF THE REQUIREMENTS\par
-            FOR THE DEGREE OF\par
         }
+        IN PARTIAL FULFILLMENT OF THE REQUIREMENTS\par
+        FOR THE DEGREE OF\par
         \vspace{3ex}\par
         \MakeUppercase{\@degree}\par
         \vspace{3ex}\par
