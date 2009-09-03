@@ -238,6 +238,7 @@
 }
 \DeclareOption{proposal}{\renewcommand{\@proposalp}{true}}
 \DeclareOption{singlespacing}{\PassOptionsToPackage{\CurrentOption}{setspace}}
+\DeclareOption{subfigure}{\PassOptionsToPackage{\CurrentOption}{tocloft}}
 \DeclareOption{thesis}{\renewcommand{\@thesisp}{true}}
 \DeclareOption{dissertation}{\renewcommand{\@thesisp}{false}}
 \DeclareOption{twocolumn}{
@@ -532,7 +533,7 @@
         \@chair, Chairperson\par
         \@othermembers\par
         \ifthenelse{\boolean{\@proposalp}\or\boolean{\@draftp}}{
-            \vspace{4ex}\par
+            \vspace{3ex}\par
             \today\par
             Version \@versionnum
         }{}
