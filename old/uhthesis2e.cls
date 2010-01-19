@@ -1168,7 +1168,7 @@ by\par
 \def\ext@figure{lof}
 \def\fnum@figure{\figurename~\thefigure}
 \def\figure{\@float{figure}}
-\let\endfigure\end@float
+\def\endfigure{\end@float}
 \@namedef{figure*}{\@dblfloat{figure}}
 \@namedef{endfigure*}{\end@dblfloat}
 
@@ -1182,7 +1182,7 @@ by\par
 \def\ext@table{lot}
 \def\fnum@table{\tablename~\thetable}
 \def\table{\@float{table}}
-\let\endtable\end@float
+\def\endtable{\end@float}
 \@namedef{table*}{\@dblfloat{table}}
 \@namedef{endtable*}{\end@dblfloat}
 
