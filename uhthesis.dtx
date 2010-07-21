@@ -86,6 +86,7 @@
 % The following pages must appear in the following order and have lower case Roman
 % numeral page numbers, only the title page is
 % unnumbered~\cite[p. 3]{uhthesisstyle2002}:
+%
 % \begin{itemize}
 %   \item title page
 %   \item signature page
@@ -128,13 +129,12 @@
 % within the uhthesis document class. Authors should take care to ensure that
 % the following requirements are met by their document:
 % \begin{itemize}
-%   \item must be organized into either sections or chapters
+%   \item organized into either sections or chapters.
 %   \item if organized in chapters, each chapter must be titled and begin on a
 %         new page
 %   \item appendices may include schedules, lists, questionnaires, test, forms,
-%         case studies, series of plates and figures, etc.
-%   \item each type of material forms a separate appendix which must be labelled
-%         separately
+%         case studies, series of plates and figures, etc., and each type of
+%         material forms a separate appendix which must be labelled separately
 %   \item the bibliography should be a style that is professionally acceptable 
 %         within the field
 %   \item only references used in the preparation of the thesis/dissertation should
@@ -143,12 +143,11 @@
 %         recommended. A quotation entirely in a foreign language should only
 %         appear in quotation marks and not be italicized or underlined.
 %   \item commas and periods should be placed within quotation marks
-%   \item i.e. and e.g. should be followed by commas
+%   \item i.e. and e.g. should always be followed by commas
 % \end{itemize}
 %
 %
 %appendices:
-%
 %
 %other formatting reqs:
 %-- page numbers either at top right or centered 1 inch from bottom
@@ -498,42 +497,43 @@
     \begin{Large}
     \begin{singlespacing}
     \begin{center}
-        \null\vspace{8ex}\par
+        \null\vspace{3ex}\par
         \MakeUppercase{\@title}\par
-        \vspace{4ex}\par
+        \vspace{2ex}\par
         \ifthenelse{\boolean{\@proposalp}}{
             A \MakeUppercase{\@papertype} PROPOSAL SUBMITTED TO MY COMMITTEE\par
         }{
-            A \MakeUppercase{\@papertype} SUBMITTED TO THE GRADUATE DIVISION\par
-            OF THE UNIVERSITY OF HAWAI`I\par
+            A \MakeUppercase{\@papertype} SUBMITTED TO THE\par
+            GRADUATE DIVISION OF THE\par
+            UNIVERSITY OF HAWAI`I AT M{\=A}NOA\par
         }
-        IN PARTIAL FULFILLMENT OF THE REQUIREMENTS\par
-        FOR THE DEGREE OF\par
-        \vspace{3ex}\par
+        IN PARTIAL FULFILLMENT OF THE\par
+        REQUIREMENTS FOR THE DEGREE OF\par
+        \vspace{2ex}\par
         \MakeUppercase{\@degree}\par
-        \vspace{3ex}\par
+        \vspace{2ex}\par
         IN\par
-        \vspace{3ex}\par
+        \vspace{2ex}\par
         \MakeUppercase{\@field}
         \ifthenelse{\equal{\@subfield}{}}{}{(\MakeUppercase{\@subfield})}\par
-        \vspace{3ex}\par
+        \vspace{2ex}\par
         \ifthenelse{\boolean{\@proposalp}}{
             \par
         }{
             \vspace{1ex}\par
             \MakeUppercase{\@degreemonth~\@degreeyear}\par
         }
-        \vspace{3ex}\par
+        \vspace{2ex}\par
         By\par
-        \vspace{2ex}\par
+        \vspace{1ex}\par
         \@author\par
-        \vspace{5ex}\par
-        \@papertype~Committee:\par
         \vspace{2ex}\par
+        \@papertype~Committee:\par
+        \vspace{1ex}\par
         \@chair, Chairperson\par
         \@othermembers\par
         \ifthenelse{\boolean{\@proposalp}\or\boolean{\@draftp}}{
-            \vspace{3ex}\par
+            \vspace{2ex}\par
             \today\par
             Version \@versionnum
         }{}
@@ -628,8 +628,10 @@
 %    \begin{macrocode}
 \newcommand{\copyrightpage}{
     \begin{Large}
-        \null\vspace{12ex}\par
-        \begin{center}Copyright {\@degreeyear} {\@author}\par\end{center}
+        \null\vspace{0.45\textheight}\par
+        \centering
+        Copyright {\@degreeyear} by \par
+        \@author\par
     \end{Large}
     \cleardoublepage
 }
@@ -721,6 +723,8 @@
     \let\origtableofcontents\tableofcontents
     \renewcommand{\tableofcontents}{
         \begin{singlespacing}
+            \setlength{\parskip}{\baselineskip}
+            \setlength{\cftbeforechapskip}{0pt}
             \origtableofcontents
         \end{singlespacing}
         \cleardoublepage
@@ -728,6 +732,7 @@
     \let\origlistoftables\listoftables
     \renewcommand{\listoftables}{
         \begin{singlespacing}
+            \setlength{\parskip}{\baselineskip}
             \origlistoftables
         \end{singlespacing}
         \cleardoublepage
@@ -735,6 +740,8 @@
     \let\origlistoffigures\listoffigures
     \renewcommand{\listoffigures}{
         \begin{singlespacing}
+            \setlength{\parskip}{\baselineskip}
+            \setlength{\cftbeforechapskip}{0pt}
             \origlistoffigures
         \end{singlespacing}
         \cleardoublepage
