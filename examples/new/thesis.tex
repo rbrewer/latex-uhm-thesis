@@ -1,0 +1,131 @@
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+%!NOTE: This example file has been prepared according to the University of
+%!      Hawaii Style & Policy Manual for Theses and Dissertations dated
+%!      "Revised September 2010". If you have one with a later date, you may
+%!      need to make revisions to this document as well. In any event, making
+%!      sure your thesis complies with Graduate Education guidelines is
+%!      ultimately your responsibility. Caveat LaTeXtor. :)
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+%% The options are (you can only choose one from each group):
+%%
+%% 10pt, 11pt, 12pt: chooses the point size for the document. "11pt" is the
+%%                   default.
+%%
+%% oneside, twoside: whether you want your document onesided or twosided. Note
+%%                   that twosided is not guaranteed to work, and style
+%%                   guidelines prohibit double sided printouts on final
+%%                   copy. "oneside" is the default.
+%%
+%% draft, final: when printing drafts you can save a lot of paper by using the
+%%               "draft" option. It switches to single spacing, displays overful
+%%               hboxes with a black box, prints a version number on title page 
+%%               and omits signature page. Of course for the final copy make
+%%               sure to use the "final" option! "final" is the default.
+%%
+%% thesis, dissertation: switches between the style for a master's thesis and a 
+%%                       Ph.D. dissertation. The differences are fairly minor
+%%                       and limited to the front matter. "thesis" is the
+%%                       default.
+%%
+%% actual, proposal: switches between actual document and proposal mode. In
+%%                   proposal mode: the title page is simplified and the
+%%                   version number is always printed.
+%%
+%%% Load the new uhthesis document class
+\documentclass[11pt]{uhthesis}
+
+%%% Load some useful packages:
+%% New LaTeX2e graphics support
+\usepackage{graphicx}
+%% Package to linebreak URLs in a sane manner.
+\usepackage{url}
+
+%%% Declarations for Front Matter. Capitalize all of these values
+%%% "normally". This allows the document class to format them properly.
+%% Full title of thesis or dissertation, capitalized like a title should be.
+\title{The Elements of Theses}
+%% Your name, capitalized normally. Do not include any titles like Dr.
+\author{Perry H. Disdainful}
+%% Month in which you intend to receive your degree (i.e. graduation).
+%% Presumably this will be one of: May, August, or December.
+\degreemonth{May}
+%% Year of expected graduation.
+\degreeyear{2015}
+%% Type of degree to be conferred.
+\degree{Master of Science}
+%% This is the chairperson of your committee. Do not use titles like Dr.
+\chair{Rap Replinger}
+%% The other members of your committee, seperated by "\\". Again, no titles,
+%% and it is customary to list the outside committee member (if you have one)
+%% last.
+\othermembers{Andy Bumatai\\
+Frank DeLima\\
+Joseph B. Bogus}
+%% The field in which you are obtaining your degree, capitalized normally.
+\field{Computer Science}
+%% If your discipline allows subfields, you can add it here. Note that this
+%% is strictly controlled, so consult the Style & Policy guide before adding
+%% a subfield.
+%\subfield{Bioinformatics}
+%% 4-6 optional keywords/phrases for use in indexing or as search terms
+\keywords{theses, dissertations, graduating, misery}
+%% The version number of your document. Consistent use of this will enable you
+%% to tell old drafts from new ones. Final actual documents omit this
+%% automatically so you can use it without fear of submission problems at the
+%% end. If you do not define this parameter, it defaults to "1.0.0".
+\versionnum{4.0.0}
+
+%%% End of preamble
+\begin{document}
+\maketitle
+
+\begin{frontmatter}
+
+%%% Note, there is no longer a signature page included in the document, it
+%%% has been replaced by Form IV
+
+%%% Create the copyright page (optional)
+\copyrightpage
+
+%%% Bring in the dedication page from external file (optional)
+\include{dedication}
+
+%%% Bring in the acknowledgments section from external file (optional)
+\include{acknowledgments}
+
+%%% Bring in the abstract section from external file
+\include{abstract}
+
+%%% Generate table of contents
+\tableofcontents
+
+%%% Generate list of tables
+\listoftables
+
+%%% Generate list of figures
+\listoffigures
+
+\end{frontmatter}
+
+%\normalsize
+%%% Bring in the body of the thesis from external file
+\include{body}
+
+%%% Switch to appendix mode
+\appendix
+
+%%% Bring in any appendices from external file (optional)
+\include{appendix}
+
+%% Just for demo purposes, include all entries from bib file
+\nocite{*}
+
+%%% Input file for bibliography
+\bibliography{example}
+%% Use this for an alphabetically organized bibliography
+\bibliographystyle{plain}
+%% Use this for a reference order organized bibliography
+%\bibliographystyle{unsrt}
+
+\end{document}

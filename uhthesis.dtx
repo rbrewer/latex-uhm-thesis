@@ -21,12 +21,12 @@
 %
 % \iffalse
 %<*driver>
-\ProvidesFile{uhthesis.dtx}[2012/04/10 v2.0.0 uhthesis.dtx file]
+\ProvidesFile{uhthesis.dtx}[2015/03/07 v2.1.0 uhthesis.dtx file]
 %</driver>
 %
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{uhthesis}
-%<class>    [2012/04/10 v2.0.0 uhthesis class]
+%<class>    [2015/03/07 v2.1.0 uhthesis class]
 %
 %<*driver>
 \documentclass{ltxdoc}
@@ -62,6 +62,8 @@
 % \changes{v2.0.0}{2012/04/10}{Beta release, use at own risk. Version bumped so
 % it will be higher than the version of old uhthesis2e class, to avoid
 % confusion}
+% \changes{v2.1.0}{2015/03/07}{Revisions to comply with Sep 2010 Style \& Policy
+% guide}
 %
 % \GetFileInfo{uhthesis.dtx}
 %
@@ -82,19 +84,15 @@
 %                        
 % This document class is based on the ``Style and Policy Manual For Theses and
 % Dissertations'' provided by the University of Hawai`i Graduate Division. The
-% version used states ``Revised April 2002'' inside the title
-% page~\cite{uhthesisstyle2002}. A more recent version of the style guide has
-% been released, dated ``September 2010'', and this document class has not been
-% scrutinized to see if it needs to be updated to meet any changed requirements.
-% It is your responsibility to determine whether this style meets your needs.
+% version used states ``September 2010'' on the title
+% page~\cite{uhthesisstyle2010}.
 %
 % The following pages must appear in the following order and have lower case
 % Roman numeral page numbers, only the title page is
-% unnumbered~\cite[p. 3]{uhthesisstyle2002}:
+% unnumbered~\cite[p. 5]{uhthesisstyle2010}:
 %
 % \begin{itemize}
 %   \item title page
-%   \item signature page
 %   \item copyright page  (optional)
 %   \item dedication page (optional)
 %   \item acknowledgements (optional)
@@ -108,13 +106,13 @@
 %
 % Text and other pages following preliminary pages are numbered using Arabic
 % numerals and must appear in the following
-% order~\cite[p. 3]{uhthesisstyle2002}:
+% order~\cite[p. 5]{uhthesisstyle2010}:
 % \begin{itemize}
-%   \item text
+%   \item text (chapters of the manuscript, including tables and figures)
 %   \item appendices (if any)
 %   \item notes (if any)
 %   \item glossary (optional)
-%   \item bibliography
+%   \item bibliography/references
 %   \item index (optional)
 % \end{itemize}
 %
@@ -166,8 +164,8 @@
 %previous section ended at the bottom of a page.
 %-- whitespace between words must be approximately even, and so full
 %justification is not recommended.
-%-- use of hawaiian words should be consistent
-%-- double spacing except where required otherwise
+%-- use of Hawaiian words should be consistent
+%-- 1.5 spacing except where required otherwise~\cite[p. 10]{uhthesisstyle2010}
 %-- no widows or orphans
 %-- no more than 3 hyphenations at the end of a line per page
 %-- no more than two consecutive lines with hyphens at the end.
@@ -200,9 +198,6 @@
 %
 % Put text here.
 %
-% \DescribeMacro{\signaturepage}
-% generates signature page
-%
 % \DescribeEnv{abstract}
 % abstract
 %
@@ -215,7 +210,7 @@
 % will be printed if it is specified.
 % 
 %    \begin{macrocode}
-\newcommand{\@doublespacep}{false}
+\newcommand{\@onehalfspacingp}{false}
 \newcommand{\@draftp}{false}
 \newcommand{\@englishp}{false}
 \newcommand{\@letterpaperp}{false}
@@ -224,8 +219,8 @@
 \newcommand{\@twosidep}{false}
 \DeclareOption{actual}{}
 \DeclareOption{dissertation}{}
-\DeclareOption{doublespacing}{
-    \renewcommand{\@doublespacep}{true}
+\DeclareOption{onehalfspacing}{
+    \renewcommand{\@onehalfspacingp}{true}
     \PassOptionsToPackage{\CurrentOption}{setspace}
 }
 \DeclareOption{draft}{
@@ -255,7 +250,7 @@
 }
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 \ExecuteOptions
-    {11pt,actual,doublespacing,letterpaper,onecolumn,oneside,final,thesis}
+    {11pt,actual,onehalfspacing,letterpaper,onecolumn,oneside,final,thesis}
 \ProcessOptions\relax
 \LoadClass[onecolumn]{report}
 %    \end{macrocode}
@@ -263,13 +258,13 @@
 % The class will emit warnings if the selected options are not compatible with
 % the requirements of the Graduate Division. twoside, single spacing and paper
 % formats other than letter are only allowed in draft
-% mode~\cite{uhthesisstyle2002}.
+% mode~\cite{uhthesisstyle2010}.
 %
 %    \begin{macrocode}
 \RequirePackage{ifthen}
 \ifthenelse{\boolean{\@draftp}}{}{
-    \ifthenelse{\boolean{\@doublespacep}}{}{
-        \ClassWarningNoLine{uhthesis}{final drafts should be double spaced}
+    \ifthenelse{\boolean{\@onehalfspacingp}}{}{
+        \ClassWarningNoLine{uhthesis}{final drafts should be 1.5 spaced}
     }
     \ifthenelse{\boolean{\@letterpaperp}}{}{
         \ClassWarningNoLine{uhthesis}
@@ -304,12 +299,12 @@
 %
 % This document style was created for documents prepared in the English language.
 % The Graduate Division specifies that dissertations may be in either English or
-% Hawaiian, so we allow for the replacement of English lables and headings. If
+% Hawaiian, so we allow for the replacement of English labels and headings. If
 % anyone is interested in making this style compatible with the Hawaiian
 % language, please contact the authors.
 %
-% Other English words that need replacement can be found in the macros
-% supporting the title and signature pages.
+% Other English words that need replacement can be found in the macro
+% supporting the title page.
 %
 % FIXME: In the future we should probably use the babel package here.
 %
@@ -387,7 +382,7 @@
 % \begin{macro}{\degreeyear}
 % The year the degree will be officially conferred.
 %    \begin{macrocode}
-\newcommand{\@degreeyear}{1990}
+\newcommand{\@degreeyear}{2013}
 \newcommand{\degreeyear}[1]{\renewcommand{\@degreeyear}{#1}}
 %    \end{macrocode}
 % \end{macro}
@@ -418,19 +413,9 @@
 %
 % \begin{macro}{\othermembers}
 % The names of your other committee members, one per line.
-% FIXME: really should be able to figure out number of members from this.
 %    \begin{macrocode}
 \newcommand{\@othermembers}{}
 \newcommand{\othermembers}[1]{\renewcommand{\@othermembers}{#1}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\numberofmembers}
-% The number of committee members, which affects the number of lines
-% on the signature page.
-%    \begin{macrocode}
-\newcommand{\@numberofmembers}{3}
-\newcommand{\numberofmembers}[1]{\renewcommand{\@numberofmembers}{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -449,6 +434,20 @@
 %    \begin{macrocode}
 \newcommand{\@subfield}{}
 \newcommand{\subfield}[1]{\renewcommand{\@subfield}{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\keywords}
+% Four to six optional keywords or short key phrases that could be used as
+% search terms to find your thesis or dissertation during a library catalog
+% or web search.
+%    \begin{macrocode}
+\newcommand{\@keywords}{}
+\newcommand{\keywords}[1]{\renewcommand{\@keywords}{%
+    \ifthenelse{\equal{#1}{}}%
+    {}%
+    {Keywords: #1}%
+}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -477,18 +476,30 @@
 % dissertation, proposal vs. actual.
 %
 % The following items must be included on the title
-% page~\cite[p. 3]{uhthesisstyle2002}:
+% page~\cite[p. 5--6]{uhthesisstyle2010}:
 % \begin{itemize}
 %   \item an `okina before the final "i" in Hawai`i
+%   \item a kahak{\=o} over the `a' (e.g. {\=a}) in M{\=a}noa
 %   \item name of the author
 %   \item degree being awarded
 %   \item field of study
-%   \item area of specialty, if any, in parenthesis after field
-%   \item the author's graduation month and year
-%   \item committee members names, outside member's is usually last
+%   \item Specializations are generally not permitted on the title page.
+%    The only specializations that may be included, with permission of the
+%    graduate program, are: ``Ecology, Evolution and Conservation Biology'',
+%    ``Marine Biology'', ``Neurosciences'',
+%    ``Japanese, Korean, or Chinese in East Asian Languages'', ``Tropical
+%    Medicine in Biomedical Sciences'' in parenthesis after field.
+%   \item the author's graduation month (December, May, or August) and year.
+%    Do not use the date you completed or turned in the thesis/dissertation.
+%   \item committee members names, University representative (outside member)
+%   is usually last
+%   \item Titles such as Dr. or Ph.D. for committee members or for yourself
+%    are not included. However, the chair should be designated by the word
+%    "chairperson."
+%   \item Optionally, you can list four to six keywords or short key phrases
+%    that could be used as search terms to find your thesis or dissertation
+%    during a library catalog or web search.
 % \end{itemize}
-% There is an additional requirement to not include titles such as Dr., but the
-% committee chair should be designated "chairperson".
 %
 % \begin{macrocode}
 \newcommand{\@papertype}{}
@@ -499,21 +510,20 @@
 }
 \renewcommand{\maketitle}{
     \thispagestyle{empty}
-    \begin{Large}
+    \large
     \begin{singlespacing}
     \begin{center}
         \null\vspace{3ex}\par
         \MakeUppercase{\@title}\par
-        \vspace{2ex}\par
+        \vspace{1in}\par
         \ifthenelse{\boolean{\@proposalp}}{
             A \MakeUppercase{\@papertype} PROPOSAL SUBMITTED TO MY COMMITTEE\par
         }{
-            A \MakeUppercase{\@papertype} SUBMITTED TO THE\par
-            GRADUATE DIVISION OF THE\par
-            UNIVERSITY OF HAWAI`I AT M{\=A}NOA\par
+            A \MakeUppercase{\@papertype} SUBMITTED TO THE GRADUATE DIVISION OF THE\par
+            UNIVERSITY OF HAWAI`I AT M{\=A}NOA%
         }
-        IN PARTIAL FULFILLMENT OF THE\par
-        REQUIREMENTS FOR THE DEGREE OF\par
+        IN PARTIAL FULFILLMENT\par
+        OF THE REQUIREMENTS FOR THE DEGREE OF\par
         \vspace{2ex}\par
         \MakeUppercase{\@degree}\par
         \vspace{2ex}\par
@@ -528,7 +538,7 @@
             \vspace{1ex}\par
             \MakeUppercase{\@degreemonth~\@degreeyear}\par
         }
-        \vspace{2ex}\par
+        \vfill\par
         By\par
         \vspace{1ex}\par
         \@author\par
@@ -537,6 +547,8 @@
         \vspace{1ex}\par
         \@chair, Chairperson\par
         \@othermembers\par
+        \vspace{3ex}\par
+        \@keywords\par
         \ifthenelse{\boolean{\@proposalp}\or\boolean{\@draftp}}{
             \vspace{2ex}\par
             \today\par
@@ -544,84 +556,8 @@
         }{}
     \end{center}
     \end{singlespacing}
-    \end{Large}
+    \normalsize
     \cleardoublepage
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\signaturepage}
-% The signaturepage macro emits a UH-style signature page ready for
-% your committee's signature. This page is only needed for the final
-% actual document, so if proposal or draft options have been provided
-% then this page will not put output. Therefore it is safe to include
-% in the document at all stages and control its presence with the
-% options. 
-% FIXME: really should use some sort of looping structure to print out
-% sig lines
-%
-%signature page:
-% \begin{itemize}
-%   \item no title or heading
-%   \item page number (ii) should appear consistent w/ rest of manuscript
-%   \item include author's name
-%   \item include author's degree
-%   \item include author's field
-%   \item include author's specialty, if any, in parenthesis after field
-%   \item exactly as many blank lines for signatures as committee members
-%   \item right margin 2 inches to prevent signing into the margin (suggested)
-% \end{itemize}
-%
-%    \begin{macrocode}
-\newcommand\signaturepage{
-    \ifthenelse{\boolean{\@proposalp}\or\boolean{\@draftp}}{}{
-        \begin{Large}
-        \begin{singlespacing}
-            \null\vspace{4ex}\par
-            \noindent We certify that we have read this
-            \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} and that, in
-            our opinion, it is satisfactory in scope and quality as a
-            \ifthenelse{\boolean{\@thesisp}}{thesis}{dissertation} for the
-            degree of {\@degree} in {\@field}
-            \ifthenelse{\equal{\@subfield}{}}{}{(\@subfield)}.\par
-            \vspace{8ex}\par
-            \parbox[l]{5in}{
-                \begin{flushright}
-                \begin{minipage}{2.7in}
-                \begin{center}
-                    \MakeUppercase{\@papertype} COMMITTEE\par
-                    ~\par
-                    \vspace{4ex}\par
-                    \rule{2.5in}{.01in}\par
-                    Chairperson\par
-                    \vspace{4ex}\par
-                    \rule{2.5in}{.01in}\par
-                    ~\par
-                    \vspace{4ex}\par
-                    \rule{2.5in}{.01in}\par
-                    \ifnum \@numberofmembers > 3
-                        ~\par
-                        \vspace{4ex}\par
-                        \rule{2.5in}{.01in}\par
-                    \fi
-                    \ifnum \@numberofmembers > 4
-                        ~\par
-                        \vspace{4ex}\par
-                        \rule{2.5in}{.01in}\par
-                    \fi
-                    \ifnum \@numberofmembers > 5
-                        ~\par
-                        \vspace{4ex}\par
-                        \rule{2.5in}{.01in}\par
-                    \fi
-                \end{center}
-                \end{minipage}
-                \end{flushright}
-            }
-        \end{singlespacing}
-        \end{Large}
-        \cleardoublepage
-    }
 }
 %    \end{macrocode}
 % \end{macro}
@@ -632,12 +568,13 @@
 % from the degreeyear macro.
 %    \begin{macrocode}
 \newcommand{\copyrightpage}{
-    \begin{Large}
+    \large
         \null\vspace{0.45\textheight}\par
-        \centering
-        Copyright {\@degreeyear} by \par
+        {\centering
+        Copyright \copyright{} {\@degreeyear} by \par
         \@author\par
-    \end{Large}
+        }
+    \normalsize
     \cleardoublepage
 }
 %    \end{macrocode}
@@ -650,7 +587,7 @@
 %   \item not required for thesis, required for dissertation
 %   \item title "ABSTRACT"
 %   \item thesis abstract no more than 150 wds, dissertation no more than 350
-%   \item double spaced
+%   \item 1.5 spaced
 % \end{itemize}
 % FIXME: really should be able to check for presence of abs in dissertation
 % FIXME: any way to generate a warning if word count is exceeded?
@@ -706,7 +643,7 @@
 % \begin{itemize}
 %   \item includes acknowledgements, abstract, list of tables, list of figures, list of
 %         abbreviations and/or symbols, appendices, bibliography, and major sections of
-%         the text, does not list title page, signature page, or dedication
+%         the text, does not list title page, or dedication
 %   \item must have dot leaders between end of heading and page number
 %   \item word headings in toc must match those in the text precisely
 %   \item each new sub-level must be indented to distinguish it from the previous level
