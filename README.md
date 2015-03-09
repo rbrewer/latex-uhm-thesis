@@ -1,6 +1,6 @@
 UH Manoa LaTeX Thesis Class Versions
 ------------------------------------
-This README describes version 2.1.0 of the uhthesis class.
+This README describes version 2.2.0 of the uhthesis class.
 
 This LaTeX class was originally developed in 2000, and has been used by many
 theses and dissertations successfully accepted by UHM Graduate Division since
@@ -17,10 +17,10 @@ style guide point by point. This new class is called "uhthesis",
 distinguishing it from the original class.
 
 The new thesis class has been used to successfully submit dissertations to
-Graduate Division, most recently in May 2013. However, it was based on the
-2010 UH thesis style guide, and now there is a 2014 version of the style
-guide. It will need to be modified for theses submitted under the new
-guidelines.
+Graduate Division, most recently in May 2013. Version 2.2.0 has been updated
+to conform to the September 2014 version of the UH thesis style guide, but
+as of this writing (2015-03-09) has not been used to submit a thesis to
+Graduate Division, so it should be considered a beta version.
 
 
 Instructions
@@ -50,7 +50,7 @@ could create ~/Library/texmf/tex/latex/uhthesis (all the directories after
 "Library" will have to be created) and then copy class file in. A similar
 procedure should work for other TeX Live distributions.
 
-The class file is documented in uhthesis.pdf
+The class file is documented in [uhthesis.pdf](https://github.com/rbrewer/latex-uhm-thesis/blob/master/uhthesis.pdf)
 
 An example of how to use the style with extensive comments is provided in the
 example/ subdirectory. The following files make up this example. Start with
@@ -71,9 +71,9 @@ Development
 The class file is written as a Documented LaTeX source file (.dtx). This
 combines the LaTeX code and the documentation in one file. If you want to
 modify the class file or documentation, edit the uhthesis.dtx file. When you
-want to generate the class file, run "pdflatex uhthesis.ins". The
+want to re-generate the class file, run "pdflatex uhthesis.ins". The
 uhthesis.dtx file can be run through pdflatex like any other document to
 generate the documentation for the class.
 
 Good luck! You can report bugs or wonderful new features you have implemented
-to the Google Group discussed above.
+to the Google Group discussed above. Pull requests gladly accepted.
