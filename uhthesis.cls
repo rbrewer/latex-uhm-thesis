@@ -26,7 +26,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{uhthesis}
-    [2015/03/07 v2.1.0 uhthesis class]
+    [2015/03/09 v2.2.0 uhthesis class]
 \newcommand{\@onehalfspacingp}{false}
 \newcommand{\@draftp}{false}
 \newcommand{\@englishp}{false}
@@ -84,7 +84,7 @@
             {final drafts should be printed on only one side}
     }{}
 }
-\RequirePackage[left=1.5in, right=1.0in, top=1.0in, bottom=1.0in,
+\RequirePackage[left=1.0in, right=1.0in, top=1.0in, bottom=1.0in,
     includefoot]{geometry}
 \RequirePackage{setspace}
 \newcommand{\acknowledgname}{Acknowledgments}
@@ -128,7 +128,7 @@
 }
 \newcommand{\@degreemonth}{May}
 \newcommand{\degreemonth}[1]{\renewcommand{\@degreemonth}{#1}}
-\newcommand{\@degreeyear}{2013}
+\newcommand{\@degreeyear}{2015}
 \newcommand{\degreeyear}[1]{\renewcommand{\@degreeyear}{#1}}
 \newcommand{\@degree}{Master of Science}
 \newcommand{\degree}[1]{\renewcommand{\@degree}{#1}}
