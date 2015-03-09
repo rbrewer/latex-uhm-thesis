@@ -94,13 +94,13 @@
 % unnumbered~\cite[p. 5]{uhthesisstyle2014}:
 %
 % \begin{itemize}
-%   \item title page
-%   \item copyright page  (optional)
+%   \item title page (no page number)
+%   \item copyright page (optional)
 %   \item dedication page (optional)
 %   \item acknowledgements (optional)
 %   \item abstract
 %   \item table of contents
-%   \item list of tables (if any)
+%   \item list of tables (if applicable)
 %   \item list of figures/illustrations/graphs/charts/maps/plates (if any)
 %   \item list of abbreviations and symbols (optional)
 %   \item preface (optional)
@@ -155,7 +155,7 @@
 %appendices:
 %
 %other formatting reqs:
-%-- page numbers either at top right or centered 1 inch from bottom
+%-- page numbers centered 1 inch from bottom~\cite[p. 10]{uhthesisstyle2014}
 %-- major headings (acknowledgements, abstract, toc, list of tables, list of
 %figures, preface, chapter headings, appendices, and biography) should appear
 %centered at the top of a new page immediately followed by the text. chapter
@@ -198,7 +198,7 @@
 %
 % \section{Usage}
 %
-% Put text here.
+% See example thesis files.
 %
 % \DescribeEnv{abstract}
 % abstract
@@ -258,7 +258,7 @@
 %    \end{macrocode}
 %
 % The class will emit warnings if the selected options are not compatible with
-% the requirements of the Graduate Division. twoside, single spacing and paper
+% the requirements of the Graduate Education. twoside, single spacing and paper
 % formats other than letter are only allowed in draft
 % mode~\cite{uhthesisstyle2014}.
 %
@@ -279,17 +279,16 @@
 }
 %    \end{macrocode}
 %
-% Margins are one-inch except on the binding side. The margin on the binding
-% side is required to be 1.5 inches to ensure that no portion of the thesis is
-% cut off during binding~\cite[p. 8]{uhthesisstyle2002}. We use the
+% Margins are one-inch 1 inch all around the page (top, right, left,
+% bottom)~\cite[p. 9]{uhthesisstyle2014}. We use the
 % \emph{includefoot} option to ensure that the page numbers fall within the
-% margins of the page, as required~\cite[p. 8]{uhthesisstyle2002}.
+% margins of the page, as required~\cite[p. 10]{uhthesisstyle2014}.
 %
 % FIXME: maybe we should pass the twoside option to geometry when set by the
 % user.
 %
 %    \begin{macrocode}
-\RequirePackage[left=1.5in, right=1.0in, top=1.0in, bottom=1.0in,
+\RequirePackage[left=1.0in, right=1.0in, top=1.0in, bottom=1.0in,
     includefoot]{geometry}
 %    \end{macrocode}
 %
