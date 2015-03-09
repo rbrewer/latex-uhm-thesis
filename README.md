@@ -1,5 +1,7 @@
 UH Manoa LaTeX Thesis Class Versions
 ------------------------------------
+This README describes version 2.1.0 of the uhthesis class.
+
 This LaTeX class was originally developed in 2000, and has been used by many
 theses and dissertations successfully accepted by UHM Graduate Division since
 then. The original class was called "uhthesis2e", showing it's age since it was
@@ -20,7 +22,6 @@ Graduate Division, most recently in May 2013. However, it was based on the
 guide. It will need to be modified for theses submitted under the new
 guidelines.
 
-This archive contains version 2.1.0 of the uhthesis class.
 
 Instructions
 ------------
@@ -59,11 +60,11 @@ abstract.tex
 acknowledgments.tex
 appendix.tex
 body.tex
-clean*
 dedication.tex
 example-figure.eps
 example.bib
 thesis.tex
+
 
 Development
 -----------
