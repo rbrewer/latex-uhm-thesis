@@ -28,9 +28,9 @@ This archive contains everything necessary to prepare a University of Hawaii
 thesis or dissertation with a recent LaTeX2e environment like TeX Live. For
 information on how do download LaTeX distributions, go to <http://www.tug.org/>
 
-This class is hosted at Google Code:
+This class is hosted at GitHub:
 
-<http://code.google.com/p/latex-uhm-thesis/>
+<https://github.com/rbrewer/latex-uhm-thesis/>
 
 For assistance with this package, please visit the associated Google Group:
 
@@ -52,7 +52,7 @@ procedure should work for other TeX Live distributions.
 The class file is documented in uhthesis.pdf
 
 An example of how to use the style with extensive comments is provided in the
-example/ subdirectory. The following files make up this style. Start with
+example/ subdirectory. The following files make up this example. Start with
 "thesis.tex".
 
 abstract.tex
