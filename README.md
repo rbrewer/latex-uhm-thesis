@@ -50,7 +50,7 @@ could create ~/Library/texmf/tex/latex/uhthesis (all the directories after
 "Library" will have to be created) and then copy class file in. A similar
 procedure should work for other TeX Live distributions.
 
-The class file is documented in [uhthesis.pdf](https://github.com/rbrewer/latex-uhm-thesis/blob/master/uhthesis.pdf)
+The class file is documented in [uhthesis.pdf](https://github.com/rbrewer/latex-uhm-thesis/raw/master/uhthesis.pdf)
 
 An example of how to use the style with extensive comments is provided in the
 example/ subdirectory. The following files make up this example. Start with
